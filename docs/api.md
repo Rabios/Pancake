@@ -55,7 +55,7 @@ pancake.graphics.BOTH                                         // Fill and stroke
 pancake.graphics.ANTIALIASING_LOW                             // Low Antialiasing
 pancake.graphics.ANTIALIASING_MEDIUM                          // Medium Antialiasing
 pancake.graphics.ANTIALIASING_HIGH                            // High Antialiasing
-pancake.graphics.context                                      // CanvasRenderingContext2D (Context of the canvas)
+pancake.graphics.context                                      // Default context used by canvas (Automatically set when build Pancake JavaScript library)
 pancake.graphics.mode                                         // Graphics drawing shapes mode
 pancake.graphics.context.canvas                               // Current canvas used by the context
 pancake.graphics.antialias                                    // Variable of antialiasing, Set it to true/false to enable/disable it
@@ -219,8 +219,6 @@ pancake.timers.pause(timer_variable)                         // Pauses countdown
 window.animate(f, frames_per_second)                         // Improved version of window.requestAnimationFrame(), With framerate
 ```
 
-> CAUTION: If you are developing a game that focuses on frame rates or gets seconds or count time,Do not use `pancake.timers.second` as it's not accurate in counting a second
-
 ## Storage
 ```javascript
 pancake.storage.save(variable, value)                        // Saves a variable to localStorage with value
@@ -276,7 +274,7 @@ pancake.browser.support.MP4()                                // Returns if brows
 pancake.browser.support.WEBM()                               // Returns if browser supports WEBM video files
 pancake.browser.support.GAMEPAD()                            // Returns if browser supports Gamepad API
 pancake.browser.open(url)                                    // Opens URL in browser
-pancake.browser.supports(f)                                  // Checks if browser supports feature from above but as string name of feature
+pancake.browser.supports(f)                                  // Checks if browser supports feature from above but as string name of feature f
 ```
 
 ## OS
