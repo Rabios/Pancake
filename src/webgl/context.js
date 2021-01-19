@@ -6,7 +6,7 @@ p.con.create = function(c, co) {
 };
 
 p.con.use = function(c, co) {
-    p.contexts[co] = canvas.getContext("webgl", { antialias: p.g.antialias, preserveDrawingBuffer: true }) || canvas.getContext("experimental-webgl", { antialias: p.g.antialias, preserveDrawingBuffer: true });
+    p.contexts[co] = c.getContext("webgl", { antialias: p.g.antialias, preserveDrawingBuffer: true }) || c.getContext("experimental-webgl", { antialias: p.g.antialias, preserveDrawingBuffer: true });
     p.g.useContext(co);
     p.can.set(c, co);
 };

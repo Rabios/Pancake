@@ -7,7 +7,7 @@ p.con.create = function(c, co) {
 };
 
 p.con.use = function(c, co) {
-    p.contexts[co] = canvas.getContext("2d");
+    p.contexts[co] = c.getContext("2d");
     p.g.useContext(co);
     p.can.set(c, co);
 };
