@@ -61,10 +61,20 @@ pancake.context.set(context, context_index)                    // Set context ha
 
 ```js
 // Variables
+<<<<<<< HEAD
 pancake.graphics.FILL                                         // Fill mode, To fill shapes
 pancake.graphics.STROKE                                       // Stroke mode, To stroke shapes
 pancake.graphics.BOTH                                         // Fill and stroke mode, To do both
 pancake.graphics.context                                      // CanvasRenderingContext2D (Context of the canvas)
+=======
+pancake.graphics.FILL                                         // Fill mode,To fill shapes
+pancake.graphics.STROKE                                       // Stroke mode,To stroke shapes
+pancake.graphics.BOTH                                         // Fill and stroke mode,To do both
+pancake.graphics.ANTIALIASING_LOW                             // Low Antialiasing
+pancake.graphics.ANTIALIASING_MEDIUM                          // Medium Antialiasing
+pancake.graphics.ANTIALIASING_HIGH                            // High Antialiasing
+pancake.graphics.context                                      // Default context used by canvas (Automatically set when build Pancake JavaScript library)
+>>>>>>> 998576cd22826e2a49ce707e3c0d545488ac1071
 pancake.graphics.mode                                         // Graphics drawing shapes mode
 pancake.graphics.context.canvas                               // Current canvas used by the context
 pancake.graphics.ctx2d_enabled                                // Set it to false if you don't wish to use non-WebGL backend functions...
@@ -267,9 +277,14 @@ pancake.timers.pause(timer_variable)                         // Pauses countdown
 pancake.timers.animate(f, milliseconds)                      // Improved version of window.requestAnimationFrame(), With framerate
 ```
 
+<<<<<<< HEAD
 ## `pancake.storage`
 
 ```js
+=======
+## Storage
+```javascript
+>>>>>>> 998576cd22826e2a49ce707e3c0d545488ac1071
 pancake.storage.save(variable, value)                        // Saves a variable to localStorage with value
 pancake.storage.load(variable)                               // Loads a variable from localStorage
 pancake.storage.remove(variable)                             // Removes a variable from localStorage
@@ -338,8 +353,12 @@ pancake.browser.support.CAF()								 // Returns if browser supports CAF (X-CAF)
 pancake.browser.support.MP4()                                // Returns if browser supports MP4 video
 pancake.browser.support.WEBM()                               // Returns if browser supports WEBM video
 pancake.browser.open(url)                                    // Opens URL in browser
+<<<<<<< HEAD
 pancake.browser.supports(f)                                  // Checks if browser supports feature from above but as string name of feature
 pancake.browser.is(str)										 //	Checks if userAgent contains string (Can be used to detect custom OS/Browser)
+=======
+pancake.browser.supports(f)                                  // Checks if browser supports feature from above but as string name of feature f
+>>>>>>> 998576cd22826e2a49ce707e3c0d545488ac1071
 ```
 
 ## `pancake.os`
@@ -612,9 +631,63 @@ pancake.contexts[0];                                           // Returns contex
 pancake.contexts[0] = pancake.canvases[0].getContext("webgl"); // That's it LOL
 
 // Audio
+<<<<<<< HEAD
 pancake.audio.load("music.mp3", 0);                          // Loads audio file
 pancake.audio_files[0];                                      // Returns music.mp3
 pancake.audio.playFromIndex(0);                              // Plays pancake.audio_files[0]
 pancake.audio_files[0].loop = true;                          // Used DOM JavaScript
 
 ```
+=======
+volume                                                   // Volume of the audio to set (0 0 - 1.0)
+
+// Input
+gamepad_button                                           // Gamepad button code, If you're beginner see above about buttons
+gamepad_analog                                           // Gamepad analog, 1 for move and 2 for camera (See above info about input)
+gamepad_direction                                        // Gamepad analog direction,See above for gamepad directions
+mouse_button                                             // Mouse buttons,See above about buttons
+key                                                      // Keyboard key,See keys above
+direction                                                // Takes "UP" or "DOWN" or "LEFT" or "RIGHT"
+
+// Timers
+f                                                        // Function
+ms                                                       // Milliseconds
+frames_per_second                                        // Frames per second for timer
+timer_variable                                           // Timer which is a variable has value pancake.timers.timer() or pancake.timers.countdown()
+
+// Graphics
+line_width                                               // Line width (0 - any)
+font_name                                                // Font name (string)
+font_size                                                // Font size (0 - any)
+a, alpha                                                 // Alpha (0 - 1.0)
+filters_names_array                                      // Array containing CSS filters names
+filters_values_array                                     // Array containing CSS filters values
+content                                                  // Gradient array content
+filter                                                   // Filter name (string)
+value                                                    // Filter value (string CSS value)
+context                                                  // The context to manipulate it
+quality                                                  // The quality of the Antialiasing to set (See graphics variables in graphics section)
+text_align                                               // Text align ("left", "right", "center", "none")
+element                                                  // Image element
+start_angle                                              // Start angle for ellipses (0 - any)
+end_angle                                                // End angle for ellipses (0 - any)
+text                                                     // String contains text
+
+// Storage
+variable                                                 // Variable we want to store but name is string
+value                                                    // Value of the variable we want to store,It's stored and value as string but use Number() function to store your number
+// NOTES: When loading variable to get value,Use Number() and load value function inside so it won't return string
+
+// Sources
+code                                                     // String contains JavaScript code
+src                                                      // Source of file (as string of course)
+
+// Other
+shape                                                   // Physics shape,Array containing shape x, y, width and height (or radius),speedX and speedY (speed are only for circles)
+title                                                   // String to set game document title
+
+// Attribute of canvas                                            
+attribute                                               // HTML DOM attribute (From JavaScript)
+value                                                   // HTML DOM attribute value to set
+```
+>>>>>>> 998576cd22826e2a49ce707e3c0d545488ac1071
