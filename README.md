@@ -1,7 +1,9 @@
+# Pancake
+
 <div align="center">
 	<img src="pancake.png" width="256", height="256"><br>
 	<p><q>Lightweight, Fast, Easy-to-use HTML5 game programming library/Game framework for all purposes!</q></p>
-</div>
+</div><br>
 <br>
 
 Pancake is successor of Cake game engine, Which can be found [here](https://github.com/steria773-archive/Cake), But no longer maintained!
@@ -84,7 +86,7 @@ pancake.graphics.color(pancake.graphics.RGB(255, 255, 0));
 pancake.graphics.line(100, 100, 200, 200, 5);
 
 // Set drawing mode to stroke
-pancake.graphics.mode = pancake.graphics.STROKE;
+pancake.graphics.setMode(pancake.graphics.STROKE);
 
 // Draw triangle with green color
 pancake.graphics.color(pancake.graphics.RGB(0, 255, 0));
@@ -157,11 +159,10 @@ function game() {
         playercolor = pancake.graphics.RGB(255, 0, 0);
     } else {
         playercolor = pancake.graphics.RGB(0, 0, 255);
-    }
-    
+    }   
 }
 
-var gameloop = pancake.timers.timer(game, 120); // Set frames per second to 120
+var gameloop = pancake.timers.timer(game, 60); // Set frames per second to 60
 ```
 
 - Keyboard + Game Loop
@@ -180,7 +181,7 @@ function game() {
     pancake.input.preventLoop();
 }
 
-var gameloop = pancake.timers.timer(game, 120); // Set frames per second to 120
+var gameloop = pancake.timers.timer(game, 60); // Set frames per second to 60
 ```
 
 > NOTE: More examples can be found in the [Examples folder](https://github.com/Rabios/Pancake/tree/master/examples)
