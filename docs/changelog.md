@@ -58,7 +58,7 @@ pancake.script.eval					// Use window.eval instead
 pancake.input.keypress				// Use pancake.input.keydown, or pancake.input.keyup instead for not repeat key press in game-loop
 ```
 
-42. Renamed some Physics functions, It's better to take look [here!](https://github.com/Rabios/Pancake/blob/master/docs/api.md#pancakephysics).
+42. Renamed some Physics functions, It's better to take look [here!](https://github.com/Rabios/Pancake/blob/master/docs/api.md#pancakephysics)
 43. Redesigned collision detection with canvas sides, So it uses object instead!
 44. Added new collision detection functions, Following were added:
 
