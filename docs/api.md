@@ -149,28 +149,28 @@ pancake.input.mouse_x                                         // Mouse X positio
 pancake.input.mouse_y                                         // Mouse Y position
 pancake.input.touch_x                                         // Touch X position (Defaults to first finger touched screen)
 pancake.input.touch_y                                         // Touch Y position (Defaults to first finger touched screen)
-pancake.input.wheel_x                                          // Mouse Wheel delta X (When rolling with mouse wheel)
-pancake.input.wheel_y                                          // Mouse Wheel delta Y (When rolling with mouse wheel)
-pancake.input.wheel_z                                          // Mouse Wheel delta Z (When rolling with mouse wheel)
-pancake.input.wheel_up                                          // Returns if rolling with mouse wheel up
+pancake.input.wheel_x                                         // Mouse Wheel delta X (When rolling with mouse wheel)
+pancake.input.wheel_y                                         // Mouse Wheel delta Y (When rolling with mouse wheel)
+pancake.input.wheel_z                                         // Mouse Wheel delta Z (When rolling with mouse wheel)
+pancake.input.wheel_up                                        // Returns if rolling with mouse wheel up
 pancake.input.wheel_down                                      // Returns if rolling with mouse wheel down
 pancake.input.wheel_left                                      // Returns if rolling with mouse wheel left
-pancake.input.wheel_right                                      // Returns if rolling with mouse wheel right
-pancake.input.accel_x                                          // Acceleration X
-pancake.input.accel_y                                          // Acceleration Y
-pancake.input.accel_z                                          // Acceleration Z
-pancake.input.swipe_direction                                  // String, Swipe direction when swipe by mouse
+pancake.input.wheel_right                                     // Returns if rolling with mouse wheel right
+pancake.input.accel_x                                         // Acceleration X
+pancake.input.accel_y                                         // Acceleration Y
+pancake.input.accel_z                                         // Acceleration Z
+pancake.input.swipe_direction                                 // String, Swipe direction when swipe by mouse
 pancake.input.gamepad_move_horizontal_direction               // Returns gamepad horizontal move analog direction
 pancake.input.gamepad_move_vertical_direction                 // Returns gamepad vertical move analog direction
 pancake.input.gamepad_camera_horizontal_direction             // Returns gamepad horizontal camera analog direction
 pancake.input.gamepad_camera_vertical_direction               // Returns gamepad vertical camera analog direction
-pancake.input.accelerometer                                      // Accelerometer used by Pancake for Accelerometer controls
-pancake.input.touches                                          // Array contains touches
+pancake.input.accelerometer                                   // Accelerometer used by Pancake for Accelerometer controls
+pancake.input.touches                                         // Array contains touches
 
 /*
 // The index 0 references to first finger ;)
-pancake.input.touches[0].x                                      // Touch position X
-pancake.input.touches[0].y                                      // Touch position Y
+pancake.input.touches[0].x                                    // Touch position X
+pancake.input.touches[0].y                                    // Touch position Y
 pancake.input.touches[0].swipe_direction                      // Touch swipe direction (If swiped with finger)
 */
 
@@ -238,7 +238,7 @@ pancake.audio.pause(audio_index)                             // Pauses audio fil
 pancake.audio.setVolume(volume, audio_index)                 // Sets volume of audio file from index
 pancake.audio.setMute(mute, audio_index)                     // Mutes or unmutes audio file from index
 pancake.audio.setLoop(loop, audio_index)                     // Loops or not to loop audio file from index
-pancake.audio.finished(audio_index)                           // Returns if audio file from index finished playing
+pancake.audio.finished(audio_index)                          // Returns if audio file from index finished playing
 pancake.audio.reset(audio_index)                             // Resets audio
 ```
 
@@ -260,8 +260,8 @@ pancake.video.reset(video_index)                             // Resets video (On
 ```js
 // Functions
 pancake.timers.countdown(f, ms)                              // Same as window.setTimeout
-pancake.timers.interval(f, ms)                                 // Same as window.setInterval
-pancake.timers.dt()                                             // Returns deltaTime
+pancake.timers.interval(f, ms)                               // Same as window.setInterval
+pancake.timers.dt()                                          // Returns deltaTime
 pancake.timers.timer(f, frames_per_second)                   // Sets interval then run function (frames per second integer from 0 to any)
 pancake.timers.pause(timer_variable)                         // Pauses countdown or interval
 pancake.timers.animate(f, milliseconds)                      // Improved version of window.requestAnimationFrame(), With framerate
@@ -289,12 +289,12 @@ pancake.content.load(json)                                   // Returns object c
 // Variables
 pancake.device.screen_width                                  // Returns device screen width
 pancake.device.screen_height                                 // Returns device screen height
-pancake.device.language                                         // Returns browser (And device) language
+pancake.device.language                                      // Returns browser (And device) language
 
 // Functions
 pancake.device.vibrate(pattern)                              // Vibrate according to pattern
 pancake.device.stopVibrating()                               // Stops vibrating
-pancake.device.online()                                         // Returns if device online
+pancake.device.online()                                      // Returns if device online
 pancake.device.geoInfo()                                     // Returns device geographics info like time, region, timezone, IP, and more...
 ```
 
@@ -314,32 +314,32 @@ pancake.browser.CHROME                                       // Returns if brows
 pancake.browser.FIREFOX                                      // Returns if browser is Mozilla Firefox
 pancake.browser.SAFARI                                       // Returns if browser is Apple Safari
 pancake.browser.OPERA                                        // Returns if browser is Opera
-pancake.browser.OPERA_MINI                                     // Returns if browser is Opera Mini
+pancake.browser.OPERA_MINI                                   // Returns if browser is Opera Mini
 pancake.browser.EDGE                                         // Returns if browser is Microsoft Edge
 pancake.browser.IE                                           // Returns if browser is Internet Explorer
 pancake.browser.SAMSUNG_INTERNET                             // Returns if browser is Samsung Internet Browser
 pancake.browser.MAXTHON                                      // Returns if browser is Maxthon
-pancake.browser.SEAMONKEY                                     // Returns if browser is Seamonkey
+pancake.browser.SEAMONKEY                                   // Returns if browser is Seamonkey
 
 
 // Functions
 pancake.browser.support.WEBGL()                              // Returns if browser supports Canvas and WebGLRenderingContext
 pancake.browser.support.CANVAS()                             // Returns if browser supports Canvas and CanvasRenderingContext2D
 pancake.browser.support.GAMEPAD()                            // Returns if browser supports Gamepad API
-pancake.browser.support.JAVA()                                 // Equivalent to navigator.javaEnabled()
+pancake.browser.support.JAVA()                               // Equivalent to navigator.javaEnabled()
 pancake.browser.support.MPEG()                               // Returns if browser supports MPEG audio
 pancake.browser.support.MP3()                                // Returns if browser supports MP3 audio
 pancake.browser.support.WAV()                                // Returns if browser supports WAV audio
 pancake.browser.support.OGG()                                // Returns if browser supports OGG audio
-pancake.browser.support.FLAC()                                 // Returns if browser supports FLAC audio
-pancake.browser.support.AAC()                                 // Returns if browser supports AAC audio
-pancake.browser.support.AACP()                                 // Returns if browser supports AACP audio
-pancake.browser.support.CAF()                                 // Returns if browser supports CAF (X-CAF) audio
+pancake.browser.support.FLAC()                               // Returns if browser supports FLAC audio
+pancake.browser.support.AAC()                                // Returns if browser supports AAC audio
+pancake.browser.support.AACP()                               // Returns if browser supports AACP audio
+pancake.browser.support.CAF()                                // Returns if browser supports CAF (X-CAF) audio
 pancake.browser.support.MP4()                                // Returns if browser supports MP4 video
 pancake.browser.support.WEBM()                               // Returns if browser supports WEBM video
 pancake.browser.open(url)                                    // Opens URL in browser
 pancake.browser.supports(f)                                  // Checks if browser supports feature from above but as string name of feature
-pancake.browser.is(str)                                         //    Checks if userAgent contains string (Can be used to detect custom OS/Browser)
+pancake.browser.is(str)                                      // Checks if userAgent contains string (Can be used to detect custom OS/Browser)
 ```
 
 ## `pancake.os`
@@ -372,7 +372,7 @@ pancake.os.NEXUS_PLAYER                                      // Returns if OS is
 pancake.os.MINIX_NEO_X5                                      // Returns if OS is Minix Neo-X5 TV OS
 pancake.os.APPLE_TV                                          // Returns if OS is Apple TV OS
 pancake.os.KINDLE                                            // Returns if OS is Amazon Kindle OS
-pancake.os.is(str)                                             //    Same as pancake.browser.is(str)
+pancake.os.is(str)                                           // Same as pancake.browser.is(str)
 ```
 
 ## `pancake.script`
@@ -395,47 +395,47 @@ pancake.util.quote(s)                                        // Returns string s
 ```js
 pancake.sprite.load(image_src, states, sprite_index)         // Loads sprite from image source with animations states/names and their sheet to index
 pancake.sprite.draw(sprite_index, state, x, y, w, h)         // Draw sprite from index with sprite's animation state/name with x, y, width and height
-pancake.sprite.pause(sprite_index, state)                     // Pause sprite from index with sprite's animation state/name
-pancake.sprite.resume(sprite_index, state)                     // Resume sprite playing from index with sprite's animation state/name if paused
+pancake.sprite.pause(sprite_index, state)                    // Pause sprite from index with sprite's animation state/name
+pancake.sprite.resume(sprite_index, state)                   // Resume sprite playing from index with sprite's animation state/name if paused
 pancake.sprite.play(sprite_index, state)                     // Resumes/Plays sprite from index with sprite's animation state/name if paused
 ```
 
 ## `pancake.gif`
 
 ```js
-pancake.gif.load(array_of_images_src, frametime, gif_index)     // Loads GIF using array of images sources to index, With duration of each frame change in milliseconds
-pancake.gif.draw(gif_index, x, y, w, h)                         // Draws GIF from index with x, y, width and height
-pancake.gif.pause(gif_index)                                 // Pauses GIF from index
+pancake.gif.load(array_of_images_src, frametime, gif_index)   // Loads GIF using array of images sources to index, With duration of each frame change in milliseconds
+pancake.gif.draw(gif_index, x, y, w, h)                       // Draws GIF from index with x, y, width and height
+pancake.gif.pause(gif_index)                                  // Pauses GIF from index
 pancake.gif.resume(gif_index)                                 // Resumes GIF playing from index if paused
-pancake.gif.play(gif_index)                                     // Resumes/Plays GIF from index if paused
+pancake.gif.play(gif_index)                                   // Resumes/Plays GIF from index if paused
 ```
 
 ## `pancake.replay`
 
 ```js
 pancake.replay.load(replay_index, start_frames_count, end_frames_count, duration, reversed, loop)  // Creates replay to index with frame number to start and frame number to end with duration of each frame and set to play reversed and looped
-pancake.replay.save(replay_index, globals)                                                           // Records frames for replay from index with ability to add global variables in object
-pancake.replay.frames(replay_index, frames_count)                                                   // Returns if frames of replay from index is frames_count
-pancake.replay.play(replay_index)                                                                   // Runs replay from index
-pancake.replay.pause(replay_index)                                                                   // Pauses replay from index
-pancake.replay.resume(replay_index)                                                                   // Resumes/Plays replay from index if paused
-pancake.replay.clear(replay_index)                                                                   // Deletes all content of replay from index (Useful if you're recording a lot of array frames)
+pancake.replay.save(replay_index, globals)                                                         // Records frames for replay from index with ability to add global variables in object
+pancake.replay.frames(replay_index, frames_count)                                                  // Returns if frames of replay from index is frames_count
+pancake.replay.play(replay_index)                                                                  // Runs replay from index
+pancake.replay.pause(replay_index)                                                                 // Pauses replay from index
+pancake.replay.resume(replay_index)                                                                // Resumes/Plays replay from index if paused
+pancake.replay.clear(replay_index)                                                                 // Deletes all content of replay from index (Useful if you're recording a lot of array frames)
 ```
 
 ## `pancake.spritefont`
 
 ```js
-pancake.spritefont.load(image_src, font_info, spritefont_index)                                       // Loads spritefont from image source with font info object to index
+pancake.spritefont.load(image_src, font_info, spritefont_index)                                      // Loads spritefont from image source with font info object to index
 pancake.spritefont.draw(spritefont_index, text, x, y, size, spacing, color, color_alpha = 0.8)       // Draw text using spritefont from index with x and y, With size and spacing
 ```
 
 ## `pancake.xhr`
 
 ```js
-pancake.xhr.get(url, content_to_send)                         // Does "GET" request with url and with content to send (Default content is null)
+pancake.xhr.get(url, content_to_send)                        // Does "GET" request with url and with content to send (Default content is null)
 pancake.xhr.post(url, content_to_send, content_type)         // Does "POST" request with url and with content to send (Default content is null)
-pancake.xhr.head(url, content_to_send)                         // Does "HEAD" request with url and with content to send (Default content is null)
-pancake.xhr.abort(XMLHttpRequest)                             // Aborts a XMLHttpRequest
+pancake.xhr.head(url, content_to_send)                       // Does "HEAD" request with url and with content to send (Default content is null)
+pancake.xhr.abort(XMLHttpRequest)                            // Aborts a XMLHttpRequest
 ```
 
 ## Keyboard keys
