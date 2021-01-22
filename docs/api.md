@@ -36,7 +36,7 @@ Pancake currently containts over 190 functions, Enjoy!
 
 ```js
 // Variables
-pancake.canvas.compatible_width                                   // Best width of canvas that fits all HTML page
+pancake.canvas.compatible_width                                // Best width of canvas that fits all HTML page
 pancake.canvas.compatible_height                               // Best height of canvas that fits all HTML page
 
 // Functions
@@ -72,7 +72,7 @@ pancake.graphics.ctx2d                                        // CanvasRendering
 pancake.graphics.backend                                      // String contains rendering context name used by Pancake when built from source
 pancake.graphic.fits                                          // Returns if canvas fits all browser window
 pancake.graphics.scissor                                      // Boolean, Used to enable/disable scissor test
-pancake.graphics.tint                                          // Image tint used to draw images, Defaults to null (No tint)
+pancake.graphics.tint                                         // Image tint used to draw images, Defaults to null (No tint)
 
 
 // Functions
@@ -81,13 +81,13 @@ pancake.graphics.random.RGB()                                 // Returns random 
 pancake.graphics.random.RGBA()                                // Returns random RGBA
 pancake.graphics.random.HSL()                                 // Returns random HSL
 pancake.graphics.random.HSLA()                                // Returns random HSLA
-pancake.graphics.fit()                                          // Resizes game canvas to fit entire browser window/screen!
+pancake.graphics.fit()                                        // Resizes game canvas to fit entire browser window/screen!
 pancake.graphics.fullscreen()                                 // Returns if game is in fullscreen mode
 pancake.graphics.toggleFullscreen()                           // Toggle fullscreen
 pancake.graphics.exitFullscreen()                             // Exit fullscreen
 pancake.graphics.screenshot(canvas_index)                     // Takes screenshot of a canvas (You can ignore using canvas_index so it works on first canvas)
 pancake.graphics.useContext(context_index)                    // Sets context for drawing
-pancake.graphics.setMode(mode)                                  // Sets graphics mode for drawing!
+pancake.graphics.setMode(mode)                                // Sets graphics mode for drawing!
 pancake.graphics.setContext(context, context_index)           // Sets context or add it to index
 pancake.graphics.setAlpha(a)                                  // Sets alpha
 pancake.graphics.RGB(r, g, b)                                 // Returns RGB color
@@ -103,10 +103,10 @@ pancake.graphics.clear()                                      // Clear canvas
 pancake.graphics.text(text, x, y)                             // Draw text
 pancake.graphics.rect(x, y, w, h)                             // Draw rectangle
 pancake.graphics.setTint(r, g, b, a)                          // Sets image tint for drawing images, Disable tint by setting pancake.graphics.tint to null
-pancake.graphics.disableTint()                                  // Disables tint
+pancake.graphics.disableTint()                                // Disables tint
 pancake.graphics.roundedRect(x, y, w, h, r)                   // Draw rounded rectangle
 pancake.graphics.circle(x, y, r)                              // Draw circle
-pancake.graphics.line(x1, y1, x2, y2)                           // Draw line
+pancake.graphics.line(x1, y1, x2, y2)                         // Draw line
 pancake.graphics.triangle(x1, y1, x2, y2, x3, y3)             // Draw triangle
 pancake.graphics.polygon(x, y, size, sides)                   // Draw polygon
 pancake.graphics.loadImage(src, image_index)                  // Load image to index
@@ -130,8 +130,8 @@ pancake.graphics.rotate(a)                                    // Rotate
 pancake.graphics.rotate(x, y)                                 // Rotate (WebGL version)
 pancake.graphics.save()                                       // Save
 pancake.graphics.restore()                                    // Restore
-pancake.graphics.beginScissor(x, y, w, h)                      // Begins scissor mode rect test for drawing
-pancake.graphics.endScissor()                                  // Ends scissor mode rect test 
+pancake.graphics.beginScissor(x, y, w, h)                     // Begins scissor mode rect test for drawing
+pancake.graphics.endScissor()                                 // Ends scissor mode rect test 
 ```
 
 ## `pancake.input`
