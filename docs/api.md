@@ -580,6 +580,8 @@ pancake.input.button.SELECT
 ```js
 pancake.audio_files                                          // Audio files array
 pancake.sprites                                              // Sprites array
+pancake.sprite.timers                                        // Sprites timers array
+pancake.scripts                                              // Scripts loaded array
 pancake.canvases                                             // Canvases created array
 pancake.contexts                                             // Contexts created array
 pancake.videos                                               // Video files array
@@ -587,6 +589,7 @@ pancake.images                                               // Images array
 pancake.replays                                              // Replays array
 pancake.fonts                                                // Spritefonts array
 pancake.gifs                                                 // GIFs array
+pancake.sprites                                              // Sprites array
 ```
 
 #### How to get content from index?

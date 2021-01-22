@@ -11,4 +11,3 @@
 9. [API](https://github.com/Rabios/Pancake/blob/master/docs/api.md)
 10. [Changelog](https://github.com/Rabios/Pancake/blob/master/docs/changelog.md)
 11. [WebGL renderer](https://github.com/Rabios/Pancake/blob/master/docs/webgl.md)
-12. [Using Pancake with Haxe](https://github.com/Rabios/Pancake/blob/master/docs/haxeport.md)

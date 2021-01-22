@@ -19,12 +19,13 @@ Pancake inspired by LOVE, Pygame, And even AppGameKit and it shares some of thei
 - Every part needed is written without dependencies! From OS detection to gamepad support...
 - You can use `CanvasRenderingContext2D` or `WebGLRenderingContext` as graphics renderer!
 - Collision detection physics!
-- Audio based on WebAudio API!
+- Audio based on HTMLAudio API!
 - Video rendering support!
 - Replay rewind support!
 - Spritefonts and Sprites support!
 - Have plugins can be used like WASM, FBInstant, And more...
 - Written in ES5 to support browsers that can't run ES6! (Internet Explorer >= 9 for example)
+- Supports [Haxe](https://haxe.org) via [Pancake.hx](https://github.com/Rabios/Pancake.hx)
 - Using indexes (Slots), Which can be good for ordering sometimes, And gives easy control of game content!
 - Optimized for js13kGames game jam!
 
