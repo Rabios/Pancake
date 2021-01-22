@@ -23,67 +23,35 @@
             // NOTES: You can still use the same colors strings you use in HTML5 canvas
             pancake.graphics.setBackgroundColor("black");
 
-            // Set color to fill and stroke with same color
-            pancake.graphics.color(shapes_color, shapes_color);
-
+            // Set color to fill and stroke with same generated color
+            pancake.graphics.color(shapes_color, pancake.graphics.RGB(255, 255, 255));
+            
             // Draw rectangle
             pancake.graphics.rect(10, 10, 50, 50);
-
+            
             // Draw circle
             pancake.graphics.circle(120, 35, 25);
 
             // Set drawing mode to stroke
-            pancake.graphics.mode = pancake.graphics.STROKE;
+            pancake.graphics.setMode(pancake.graphics.STROKE);
 
             // Draw triangle
             // x1, y1, x2, y2, x3, y3
             pancake.graphics.triangle(10, 150, 50, 80, 100, 150);
 
             // Set drawing mode to both fill and stroke
-            pancake.graphics.mode = pancake.graphics.BOTH;
-
-            // Set color again to apply stroke
-            pancake.graphics.color(shapes_color, pancake.graphics.RGB(255, 255, 255));
-
-            // Tip: You can set line width for better line
-            //pancake.graphics.setLineWidth(4);
-
-            // But via CanvasRenderingContext2D
-            // Setting line width will be by the way below
-            // pancake.graphics.context.lineWidth = 4;
-
-            // On WebGLRenderingContext, it can be set via...
-            // pancake.graphics.context.lineWidth(a);
-            // a <= 1
+            pancake.graphics.setMode(pancake.graphics.BOTH);
 
             // Draw polygon
-            pancake.graphics.polygon([
-                [ 10, 200 ],
-                [ 100, 200 ],
-                [ 10, 300 ],
-                [ 100, 300 ]
-            ]);
-
+            pancake.graphics.polygon(100, 300, 50, 6);
+            
             // Draw rounded rectangle
             // x, y, width, height, radius
             pancake.graphics.roundedRect(250, 50, 100, 100, 25);
-
+            
             // Draw line
             // x1, y1, x2, y2
             pancake.graphics.line(50, 350, 300, 500);
-
-            // Draw gradient rectangle
-            // NOTES: Width and height of gradient rects should be > 200
-            // Or else you will just see 1 color
-            pancake.graphics.gradientRect(400, 200, 300, 300, [
-                [ 0, "dodgerblue" ],
-                [ 0.5, "blue" ],
-                [ 1, "darkblue" ]
-            ]);
-
-            // Let's erase something
-            // OOPS
-            pancake.graphics.erase(500, 300, 100, 100);
         </script>
     </body>
 </html>

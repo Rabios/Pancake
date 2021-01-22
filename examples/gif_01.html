@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pancake - GIF</title>
+    </head>
+    <body>
+        <script src="../build/pancake.js"></script>
+        <script>
+            // Create canvas with size compatible on all devices,With index 0
+            // Create context for canvas has index 0 and set graphics to use it
+            // Set background color to black
+            pancake.canvas.create(400, 400, 0);
+            pancake.context.create(0, 0);
+            pancake.graphics.useContext(0);
+            pancake.graphics.setBackgroundColor("black");
+
+            // Create a GIF from images, And set index of the created GIF to 0, Frames change each 20ms
+            // HINT: You can use Piskel or any other tools for spritesheets cutting
+            pancake.gif.load([
+                "gif_01/01.png", "gif_01/02.png", "gif_01/03.png", "gif_01/04.png",
+                "gif_01/05.png", "gif_01/06.png", "gif_01/07.png", "gif_01/08.png",
+                "gif_01/09.png", "gif_01/10.png", "gif_01/11.png", "gif_01/12.png"
+            ], 20, 0);
+
+            function game() {
+                // Clear
+                pancake.graphics.clear();
+                
+                // Draw GIF
+                pancake.gif.draw(0, 100, 100, 200, 200);
+            }
+
+            var gameloop = pancake.timers.timer(game, 60);
+        </script>
+    </body>
+</html>

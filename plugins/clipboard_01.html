@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pancake - Clipboard</title>
+	</head>
+	<body>
+		<p>This example demonstrates clipboard plugin, Note that it works only with modern browsers that support ES6!</p><br>
+		<button id="copy">Copy this text</button>
+		<button id="get">Show text copied</button>
+		<script src="../build/pancake.js"></script>
+		<script src="clipboard.js"></script>
+		<script>
+			document.getElementById("copy").onclick = function() {
+				pancake.clipboard.copy(document.getElementById("copy").innerHTML);
+			};
+			
+			document.getElementById("get").onclick = function() {
+				window.alert(pancake.clipboard.get());
+			};
+		</script>
+	</body>
+</html>

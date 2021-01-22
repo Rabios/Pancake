@@ -1,29 +1,37 @@
-# Pancake
-Lightweight,Fast,And easy-to-use HTML5 game programming library/Game framework for all purposes
+<div align="center">
+	<img src="pancake.png" width="256", height="256"><br>
+	<p><q>Lightweight, Fast, Easy-to-use HTML5 game programming library/Game framework for all purposes!</q></p>
+</div>
+<br>
 
-Pancake is successor of Cake game engine,Which removed from GitHub
+Pancake is successor of Cake game engine, Which can be found [here](https://github.com/steria773-archive/Cake), But no longer maintained!
 
-Pancake inspired by LOVE,Pygame,And even AppGameKit and it shares some of their concepts
+Pancake inspired by LOVE, Pygame, And even AppGameKit and it shares some of their concepts...
 
 ## Features
-- Shares concepts of most lovable frameworks like LOVE,Pygame,And AppGameKit
-- Easy and simple to setup
-- Free, Moddable, Open-Source,And Cross-Platform
-- Fast, Lightweight, And thin in one pack (All in over 40kb, Minimifed version over 30kb)
-- Every part needed is written without dependencies,From OS detection to gamepad support
-- You can use `CanvasRenderingContext2D` or `WebGLRenderingContext` as graphics core.
-- Collision detection physics
-- Audio based on WebAudio API
-- Video support
-- Written in ES5 to support browsers that can't run ES6 (Internet Explorer >= 9 for example)
-- Using indexes (Slots), Which can be good for ordering sometimes, And gives easy control of game content
-- Optimized for js13kGames game jam
+
+- Shares concepts of most lovable frameworks like LOVE, Pygame, And AppGameKit!
+- Easy and simple to setup!
+- Free, Moddable, Open-Source, Cross-Platform!
+- Fast, Lightweight, And thin in one pack! (All in over 40kb, Minimifed version over 30kb)
+- Every part needed is written without dependencies! From OS detection to gamepad support...
+- You can use `CanvasRenderingContext2D` or `WebGLRenderingContext` as graphics renderer!
+- Collision detection physics!
+- Audio based on WebAudio API!
+- Video rendering support!
+- Replay rewind support!
+- Spritefonts and Sprites support!
+- Have plugins can be used like WASM, FBInstant, And more...
+- Written in ES5 to support browsers that can't run ES6! (Internet Explorer >= 9 for example)
+- Using indexes (Slots), Which can be good for ordering sometimes, And gives easy control of game content!
+- Optimized for js13kGames game jam!
 
 Want to know a lot? See the [documentation](https://github.com/Rabios/Pancake/tree/master/docs/README.md)
 
 ## Examples
 
 - Creating a game canvas
+
 ```javascript
 // Create canvas with both width and height of 600,And set it's index to 0
 pancake.canvas.create(600, 600, 0);
@@ -35,6 +43,7 @@ pancake.graphics.useContext(0);
 ```
 
 - Drawing text
+
 ```javascript
 // Create canvas with both width and height of 600,And set it's index to 0
 pancake.canvas.create(600, 600, 0);
@@ -52,6 +61,7 @@ pancake.graphics.text("Hello Pancake", 10, 10);
 ```
 
 - Drawing shapes
+
 ```javascript
 // Create canvas with both width and height of 600,And set it's index to 0
 pancake.canvas.create(800, 800, 0);
@@ -62,35 +72,32 @@ pancake.context.create(0, 0);
 pancake.graphics.useContext(0);
 
 // Draw rectangle with red color
-pancake.graphics.color("red");
+pancake.graphics.color(pancake.graphics.RGB(255, 0, 0));
 pancake.graphics.rect(100, 100, 50, 50);
 
 // Draw circle with radius of 50 and orange color
-pancake.graphics.color("orange");
+pancake.graphics.color(pancake.graphics.RGB(255, 165, 0));
 pancake.graphics.circle(200, 200, 50);
 
 // Draw line with width of 5 and yellow color
-pancake.graphics.color("yellow");
+pancake.graphics.color(pancake.graphics.RGB(255, 255, 0));
 pancake.graphics.line(100, 100, 200, 200, 5);
 
 // Set drawing mode to stroke
 pancake.graphics.mode = pancake.graphics.STROKE;
 
 // Draw triangle with green color
-pancake.graphics.color("green");
+pancake.graphics.color(pancake.graphics.RGB(0, 255, 0));
 pancake.graphics.triangle(500, 50, 600, 50, 500, 150);
 
-// Draw polygon with points and blue color
-pancake.graphics.color("blue");
+// Draw polygon with 6 sides and blue color
+pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
 
-// From 200, 200 to 200, 300
-pancake.graphics.polygon([ [ 200, 200 ],
-                           [ 200, 300 ],
-                           [ 300, 350 ],
-                           [ 200, 200 ] ]);
+pancake.graphics.polygon(100, 300, 50, 6);
 ```
 
 - Playing Audio
+
 ```javascript
 // When audio loaded, Play it directly
 pancake.audio.play("game.mp3");
@@ -102,13 +109,14 @@ pancake.audio.load("loaded.mp3", 0);
 pancake.audio.playFromIndex(0);
 
 // Pauses loaded.mp3
-pancake.audio.pauseFromIndex(0);
+pancake.audio.pause(0);
 
 // Resumes loaded.mp3
 pancake.audio.playFromIndex(0);
 ```
 
 - Saving variables
+
 ```javascript
 // Save score to localStorage variable "score"
 pancake.storage.save("score", Number(0));
@@ -118,8 +126,9 @@ var score = Number(pancake.storage.load("score"));
 ```
 
 - Physics + Game Loop
+
 ```javascript
-var playercolor = "blue";
+var playercolor = pancake.graphics.RGB(0, 0, 255);
 
 // Use a HTML <canvas> tags that has ID "canvas"
 // And set index of the context that will use it to 0
@@ -138,16 +147,16 @@ function game() {
     pancake.graphics.rect(rect1.x, rect1.y, rect1.w, rect1.h);
     
     // Draw second rectangle
-    pancake.graphics.color("green");
+    pancake.graphics.color(pancake.graphics.RGB(0, 255, 0));
     pancake.graphics.rect(rect2.x, rect2.y, rect2.w, rect2.h);
 
     // Check collision between both 2 rectangles
     // If true then change color of first rectangle
     // Else then reset it's color to the default color
-    if (pancake.physics.checkCollisionRect(rect1.x, rect1.y, rect1.w, rect1.h, rect2.x, rect2.y, rect2.w, rect2.h)) {
-        playercolor = "red";
+    if (pancake.physics.checkCollisionRecs(rect1.x, rect1.y, rect1.w, rect1.h, rect2.x, rect2.y, rect2.w, rect2.h)) {
+        playercolor = pancake.graphics.RGB(255, 0, 0);
     } else {
-        playercolor = "blue";
+        playercolor = pancake.graphics.RGB(0, 0, 255);
     }
     
 }
@@ -156,13 +165,13 @@ var gameloop = pancake.timers.timer(game, 120); // Set frames per second to 120
 ```
 
 - Keyboard + Game Loop
+
 ```javascript
 function game() {
     // If key pressed
-    if (pancake.input.keypress(pancake.input.key.Z)) alert("Key pressed");
 
     // If key down
-    if (pancake.input.keydown(pancake.input.key.X)) alert("Key down");
+    if (pancake.input.keydown(pancake.input.key.X)) alert("Key down/press");
 
     // If key up
     if (pancake.input.keyup(pancake.input.key.C)) alert("Key up");
@@ -174,29 +183,25 @@ function game() {
 var gameloop = pancake.timers.timer(game, 120); // Set frames per second to 120
 ```
 
-> NOTES: More examples can be found in the [Examples folder](https://github.com/Rabios/Pancake/tree/master/examples)
+> NOTE: More examples can be found in the [Examples folder](https://github.com/Rabios/Pancake/tree/master/examples)
 
 ## Build
 
-> NOTE 1: Pancake is prebuilt but if you are modify the source then you will need to rebuild by modifying and running build script.
-
-> NOTE 2: As of v0.0.12, I no longer offer build using batch or shell due to being unstable :(
-
 Build using Python:
+
 ```batch
 mkdir pancake
 cd pancake
 git clone https://github.com/Rabios/Pancake.git
-python build.py canvas
+python build.py
 ```
 
-> NOTE 3: You can use `webgl` instead of `canvas` when building to generate WebGL version of Pancake!
+A folder named `build` will created (if not exist) in the repository folders, Containing `pancake.js`, Which is the full build.
 
-A folder named `build` will created (if not exist) in the repository folders,Containing `pancake.js`, Which is the full build.
-
-> NOTE 4: Grab the build [here](https://cdn.jsdelivr.net/gh/Rabios/Pancake@master/build/pancake.js),Or [here](https://cdn.jsdelivr.net/gh/Rabios/Pancake@master/build/pancake.min.js) for the minimifed version
+> For more info about building Pancake see [here](https://github.com/Rabios/Pancake/blob/master/docs/build_system.md).
 
 ## License
+
 ```
 MIT License
 

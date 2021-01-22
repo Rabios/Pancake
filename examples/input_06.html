@@ -4,29 +4,30 @@
         <title>Pancake - Touchscreen movement</title>
     </head>
     <body>
-        <p>Move player with touchscreen</p>
         <canvas id="canvas" width="400" height="400" style="background-color: black;"></canvas>
         <script src="../build/pancake.js"></script>
         <script>
             var player_color = pancake.graphics.random.RGB();
-
+            
             // Use HTML <canvas> tags that has id "canvas"
             pancake.context.use(document.getElementById("canvas"), 0);
-
+            
+            pancake.graphics.color(player_color);
+            
             function game() {
                 // Clear
                 pancake.graphics.clear();
 
                 // Draw player
-                pancake.graphics.color(player_color);
-                pancake.graphics.square(pancake.input.touch_x, pancake.input.touch_y, 40);
+                if (pancake.input.touches) pancake.graphics.square(pancake.input.touch_x, pancake.input.touch_y, 40);
 
                 // To prevent input loop
                 // Required when using keyboard and mouse buttons
                 pancake.input.preventLoop();
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
+        <p>Move player with touchscreen</p>
     </body>
 </html>

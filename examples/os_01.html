@@ -5,46 +5,50 @@
     </head>
     <body>
         <h1>What is your OS?</h1>
-        <p>Android: <code id="android"></code></p>
-        <p>iOS: <code id="ios"></code></p>
-        <p>Windows: <code id="windows"></code></p>
-        <p>Windows Phone: <code id="windows_phone"></code></p>
-        <p>OSX: <code id="osx"></code></p>
-        <p>Linux: <code id="linux"></code></p>
-        <p>Ubuntu: <code id="ubuntu"></code></p>
-        <p>PlayStation: <code id="ps"></code></p>
-        <p>XBOX: <code id="xbox"></code></p>
+        <p>Android: <b id="android"></b></p>
+        <p>iOS: <b id="ios"></b></p>
+        <p>Windows: <b id="windows"></b></p>
+        <p>Windows Phone: <b id="windows_phone"></b></p>
+        <p>OSX: <b id="osx"></b></p>
+        <p>Linux: <b id="linux"></b></p>
+        <p>Ubuntu: <b id="ubuntu"></b></p>
+        <p>PlayStation: <b id="ps"></b></p>
+        <p>XBOX: <b id="xbox"></b></p>
+        <p>Nintendo: <b id="nintendo"></b></p>
         <script src="../build/pancake.js"></script>
         <script>
-            document.getElementById("android").innerHTML = pancake.os.ANDROID;
+            document.getElementById("android").innerHTML = pancake.os.ANDROID ? "YES" : "NO";
             document.getElementById("android").style.color = pancake.os.ANDROID ? "green" : "red";
 
-            document.getElementById("ios").innerHTML = pancake.os.iOS;
+            document.getElementById("ios").innerHTML = pancake.os.iOS ? "YES" : "NO";
             document.getElementById("ios").style.color = pancake.os.iOS ? "green" : "red";
             
-            document.getElementById("windows").innerHTML = pancake.os.WINDOWS;
+            document.getElementById("windows").innerHTML = pancake.os.WINDOWS ? "YES" : "NO";
             document.getElementById("windows").style.color = pancake.os.WINDOWS ? "green" : "red";
             
-            document.getElementById("windows_phone").innerHTML = pancake.os.WINDOWS_PHONE;
+            document.getElementById("windows_phone").innerHTML = pancake.os.WINDOWS_PHONE ? "YES" : "NO";
             document.getElementById("windows_phone").style.color = pancake.os.WINDOWS_PHONE ? "green" : "red";
             
-            document.getElementById("osx").innerHTML = pancake.os.OSX;
+            document.getElementById("osx").innerHTML = pancake.os.OSX ? "YES" : "NO";
             document.getElementById("osx").style.color = pancake.os.OSX ? "green" : "red";
             
-            document.getElementById("linux").innerHTML = pancake.os.LINUX;
+            document.getElementById("linux").innerHTML = pancake.os.LINUX ? "YES" : "NO";
             document.getElementById("linux").style.color = pancake.os.LINUX ? "green" : "red";
             
-            document.getElementById("ubuntu").innerHTML = pancake.os.UBUNTU;
+            document.getElementById("ubuntu").innerHTML = pancake.os.UBUNTU ? "YES" : "NO";
             document.getElementById("ubuntu").style.color = pancake.os.UBUNTU ? "green" : "red";
             
-            document.getElementById("ps").innerHTML = pancake.os.PLAYSTATION;
-            document.getElementById("ps").innerHTML = pancake.os.PLAYSTATION ? "green" : "red";
+            document.getElementById("ps").innerHTML = pancake.os.PLAYSTATION ? "YES" : "NO";
+            document.getElementById("ps").style.color = pancake.os.PLAYSTATION ? "green" : "red";
             
-            document.getElementById("xbox").innerHTML = pancake.os.XBOX;
+            document.getElementById("xbox").innerHTML = pancake.os.XBOX ? "YES" : "NO";
             document.getElementById("xbox").style.color = pancake.os.XBOX ? "green" : "red";
+            
+            document.getElementById("nintendo").innerHTML = pancake.os.NINTENDO ? "YES" : "NO";
+            document.getElementById("nintendo").style.color = pancake.os.NINTENDO ? "green" : "red";
         </script>
         <style>
-            code { color: red; }
+            b { color: red; }
         </style>
     </body>
 </html>

@@ -21,6 +21,9 @@
 
             // Load image apple.png to images index 0
             pancake.graphics.loadImage("apple.png", 0);
+            
+            // This image is from Kenney, https://kenney.nl
+            pancake.graphics.loadImage("diceRed_border.png", 1);
 
             function game() {
                 // Clear
@@ -29,12 +32,25 @@
                 // Draw image from images index 0
                 // With x and y of 0
                 // And with both width and height of 64
+                // Another way: pancake.graphics.image(image, x, y, w, h)
+                
+                // Disable tint at beginning, So first image won't get tinted after tinting next images in game-loop
+                pancake.graphics.disableTint();
                 pancake.graphics.imageFromIndex(0, 0, 0, 64, 64);
+                
+                // Draw a part of image from images index 0
+                // With x and y of 100
+                // And with both width and height of 64
+                // The 4 parameters after 1st one defines sx, sy, sw, sh And last 4 defines dx, dy, dw, dh
+                // Another way: pancake.graphics.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
+                // Set tint to blue, Then draw!
+                pancake.graphics.setTint(0, 0, 255, 255);
+                pancake.graphics.drawImageFromIndex(1, 68, 0, 68, 68, 100, 100, 64, 64);
             }
 
             // Create timer for game loop
-            // Set timer's frames per second to 120, With function game to use it
-            var gameloop = pancake.timers.timer(game, 120);
+            // Set timer's frames per second to 60, With function game to use it
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
     </body>
 </html>

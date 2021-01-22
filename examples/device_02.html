@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pancake - Location</title>
+    </head>
+    <body>
+        <p>IP: <b id="ip"></b></p>
+        <p>City: <b id="city"></b></p>
+        <p>Country: <b id="country"></b></p>
+        <p>Location: <b id="loc"></b></p>
+        <p>Region: <b id="region"></b></p>
+        <p>Telecom: <b id="org"></b></p>
+        <p>Timezone: <b id="timezone"></b></p>
+        <script src="../build/pancake.js"></script>
+        <script>
+            if (!pancake.device.online()) {
+                alert("ERROR: No internet connection!");
+            } else {
+                var geo_info = pancake.device.geoInfo();
+                for (key in geo_info) {
+                    if (!(key == "readme")) document.getElementById(key).innerHTML = geo_info[key];
+                }
+            }
+        </script>
+    </body>
+</html>

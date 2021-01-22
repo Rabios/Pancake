@@ -4,13 +4,10 @@
         <title>Pancake - Touch 'n Click</title>
     </head>
     <body>
-        <p>Click or touch the canvas to see in action</p>
-        <!-- This time,I set canvas background color using style attribute -->
+        <!-- This time, I set canvas background color using style attribute -->
         <canvas id="canvas" style="background-color: black;" width="400" height="400"></canvas>
         <script src="../build/pancake.js"></script>
         <script>
-            // NOTES: If you see a bug or problem in touch,Please report in GitHub issues
-            // TODO: Add swipe functionality with keeping the size of pancake
             pancake.context.use(document.getElementById("canvas"), 0);
 
             function game() {
@@ -24,7 +21,8 @@
                 pancake.input.preventLoop();
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
+        <p>Click or touch the canvas to see in action</p>
     </body>
 </html>

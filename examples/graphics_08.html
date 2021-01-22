@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pancake - Scissor Test</title>
+    </head>
+    <body>
+        <script src="../build/pancake.js"></script>
+        <script>
+            pancake.canvas.create(800, 600, 0);
+            pancake.context.create(0, 0);
+            pancake.graphics.useContext(0);
+            
+            function gameloop() {
+                pancake.timers.animate(gameloop);
+                pancake.graphics.clear();
+                pancake.graphics.beginScissor(pancake.input.mouse_x, pancake.input.mouse_y, 200, 200);
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
+                pancake.graphics.rect(400, 200, 200, 200);
+                
+                pancake.graphics.color(pancake.graphics.RGB(255, 0, 0));
+                pancake.graphics.circle(100, 100, 100);
+                pancake.graphics.endScissor();
+                
+                if (pancake.input.keydown(pancake.input.key.E)) pancake.graphics.scissor = !pancake.graphics.scissor;
+                pancake.input.preventLoop();
+            }
+            
+            pancake.timers.animate(gameloop);
+        </script>
+        <p>Scissor rectangle test, Press E to enable/disable scissor test...</p>
+    </body>
+</html>

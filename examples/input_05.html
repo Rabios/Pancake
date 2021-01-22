@@ -16,13 +16,13 @@
             pancake.context.use(document.getElementById("canvas"), 0);
 
             // Resize canvas to fit the window
-            pancake.canvas.resize(pancake.canvas.compatible_width, pancake.canvas.compatible_height, 0);
+            pancake.canvas.resize(pancake.canvas.compatible_width, pancake.canvas.compatible_height - 50, 0);
             
             // Set background color to black
             pancake.graphics.setBackgroundColor("black");
 
             // Set fill color to blue
-            pancake.graphics.color("blue");
+            pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
 
             function game() {
                 // Update player position
@@ -34,9 +34,12 @@
 
                 // Draw player
                 pancake.graphics.rect(player.x, player.y, player.w, player.h);
-
+                
                 // Swipe controls
-                // Use "UP","DOWN","LEFT","RIGHT"
+                // Use "UP", "DOWN", "LEFT", "RIGHT"
+                // pancake.input.swipe(direction, finger)
+                // NOTE 1: finger will set to 0 (First finger) if not defined.
+                // NOTE 2: finger functionality only for mobile, On PC even if finger set to 0 it will simulated via mouse...
                 if (pancake.input.swipe("UP")) {
                     player.vy = -3;
                     player.vx = 0;
@@ -56,12 +59,13 @@
                     player.vy = 0;
                     player.vx = 3;
                 }
-
+                
                 // Prevent input loop
                 pancake.input.preventLoop();
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
+        <p><b>Swipe by touch or mouse to move player by swipe direction...</b></p>
     </body>
 </html>

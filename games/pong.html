@@ -27,7 +27,7 @@
             pancake.canvas.resize(pancake.canvas.compatible_width, pancake.canvas.compatible_height, 0);
             
             // Set font and fill color
-            pancake.graphics.color("white");
+            pancake.graphics.color(pancake.graphics.RGB(255, 255, 255));
             pancake.graphics.setFont("Arial", 64);
 
             // Start game with ball moving to player 1 (You)
@@ -61,7 +61,7 @@
                     if (pancake.input.keyup(pancake.input.key.DOWN) || pancake.input.keyup(pancake.input.key.S)) p1.down = false;
                     if (p1.up) p1.y -= 15;
                     if (p1.down) p1.y += 15;
-                } else p1.y = pancake.input.touch_y;
+                } else p1.y = pancake.input.touches[0].y;
                 
 
                 // Physics
@@ -88,8 +88,8 @@
                 if (pancake.physics.checkCollisionLeftCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ]) || pancake.physics.checkCollisionRightCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ], 0)) {
                     
                     // Check which side to increase score
-                    if (pancake.physics.checkCollisionLeftCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ])) score.p1++;
-                    if (pancake.physics.checkCollisionRightCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ], 0)) score.p2++;
+                    if (pancake.physics.checkCollisionLeftCanvas(ball)) score.p1++;
+                    if (pancake.physics.checkCollisionRightCanvas(ball, 0)) score.p2++;
                     ball.vx = -ball.vx;
                 
                 }

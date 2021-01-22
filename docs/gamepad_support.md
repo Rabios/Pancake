@@ -1,5 +1,6 @@
-# Gamepad support for Pancake
-Gamepad API is supported in major browsers (Except IE >= 9) and supports most gamepads,Pancake using Gamepad API for gamepad controls
+# Gamepad Support
+
+Gamepad API is supported in major browsers (Except Internet Explorer), And supports most gamepads, Pancake uses Gamepad API for gamepad input.
 
 ## How to use?
 ```html
@@ -18,8 +19,8 @@ Gamepad API is supported in major browsers (Except IE >= 9) and supports most ga
 
                     // Check if X button pressed on gamepad with index 0
                     // Works on both PS4/PS3 and XBOX gamepads
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.XBOX_X,0) || 
-                        pancake.input.gamepadButtonPressed(pancake.input.button.PLAYSTATION_X,0)) {
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.XBOX_X) || 
+                        pancake.input.gamepadButtonPressed(0, pancake.input.button.PLAYSTATION_X)) {
 
                         window.alert("Gamepad input works!!!");
                         console.info("Gamepad is working,WOW!!!");
@@ -38,7 +39,9 @@ Gamepad API is supported in major browsers (Except IE >= 9) and supports most ga
 ```
 
 ## NOTES
-1. X gamepad button is the only gamepad button that has variants
-2. Gamepad input does not works on Internet Explorer,It's recommended to use `try` and `catch` in case you want to use it
-3. Sometimes gamepad connected but browser gives error that is not connected or gamepad input doesn't works,In this case try to remove the controller and plug it again,Or...Keep pressing buttons until works
-4. Gamepad analogs are also supported,But to check which direction you will give both analog direction and direction string (Uppercase string contains direction),See [`input_04.html`](https://github.com/Rabios/Pancake/blob/master/examples/input_04.html) in examples folder to find more about this
+
+1. X gamepad button is the only gamepad button that has variants (XBOX's X button number is 2 and PlayStation's one is 0).
+2. Gamepad input does not works on Internet Explorer, It's recommended to use `try` and `catch` in case you want to use it
+3. Sometimes gamepad connected but browser gives error that is not connected or gamepad input doesn't works, In this case try to remove the controller and plug it again, Or...Keep pressing buttons until works.
+4. Gamepad Analogs also supported!
+5. Gamepad input might not work outside of game loop (Due to being how Gamepad API works).

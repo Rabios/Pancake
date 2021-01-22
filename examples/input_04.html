@@ -13,7 +13,7 @@
 
             // Create context and set it external canvas with id "canvas"
             // Set created context index to 0
-            // Set canvas index to 0,Since custom canvases can't have index
+            // Set canvas index to 0, Since custom canvases can't have index
             pancake.context.use(document.getElementById("canvas"), 0);
 
             // Resize canvas to fit the window
@@ -28,34 +28,32 @@
                 pancake.graphics.clear();
 
                 // Draw player
-                pancake.graphics.color("blue");
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
                 pancake.graphics.circle(px, py, 30);
 
                 // Set font and draw info text
-                pancake.graphics.color("white");
+                pancake.graphics.color(pancake.graphics.RGB(255, 255, 255));
                 pancake.graphics.setFont("Arial", 24);
                 pancake.graphics.text("Move circle with gamepad move analog or DPAD", 10, 30);
 
                 // Check if first gamepad connected (First gamepad index is always 0) and Gamepad API supported
-                // WARNING: This example won't work on internet explorer 11 cause it doesn't support Gamepad API
+                // WARNING: This example won't work on internet explorer cause it doesn't support Gamepad API
                 if (pancake.browser.support.GAMEPAD() && pancake.input.gamepadConnected(0)) {
-
+                    
                     // Analog controls
-                    // gamepad index, analog (Or analog index), analog direction, direction
+                    // gamepad index, analog (Or analog index), analog direction
                     // FIRST NOTE: direction can be "UP", "DOWN", "LEFT", "RIGHT"
-                    // SECOND NOTE: Also direction must be equivalent to analog direction check
-                    // Example: pancake.input.GAMEPAD_ANALOG_UP for analog direction, "UP" for direction
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_UP, "UP")) py -= 10;
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_DOWN, "DOWN")) py += 10;
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_LEFT, "LEFT")) px -= 10;
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_RIGHT, "RIGHT")) px += 10;
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "UP")) py -= 10;
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "DOWN")) py += 10;
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "LEFT")) px -= 10;
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "RIGHT")) px += 10;
 
                     // DPAD Controls
                     // Check if a gamepad button pressed with gamepad index
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.UP, 0)) py -= 10;
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.DOWN, 0)) py += 10;
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.LEFT, 0)) px -= 10;
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.RIGHT, 0)) px += 10;
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.UP)) py -= 10;
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.DOWN)) py += 10;
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.LEFT)) px -= 10;
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.RIGHT)) px += 10;
 
                 }
 
@@ -64,8 +62,8 @@
 
             }
 
-            // Create timer gameloop and set it to run function game at 120 frames per second
-            var gameloop = pancake.timers.timer(game, 120);
+            // Create timer gameloop and set it to run function game at 60 frames per second
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
     </body>
 </html>

@@ -5,43 +5,82 @@
     </head>
     <body>
         <h1>Does your browser support?</h1>
-        <p><code id="text">CanvasRenderingContext2D</code>: <code id="crc2d"></code></p>
-        <p>Gamepad API: <code id="gamepad"></code></p>
-        <p>MPEG: <code id="mpeg"></code></p>
-        <p>MP3: <code id="mp3"></code></p>
-        <p>OGG: <code id="ogg"></code></p>
-        <p>WAV: <code id="wav"></code></p>
-        <p>MP4: <code id="mp4"></code></p>
-        <p>WEBM: <code id="webm"></code></p>
+        <p>CanvasRenderingContext2D: <b id="crc2d"></b></p>
+        <p>WebGL: <b id="gl"></b></p>
+        <p>Gamepad API: <b id="gamepad"></b></p>
+        <p>Java: <b id="java"></b></p>
+        <p>MPEG: <b id="mpeg"></b></p>
+        <p>MP3: <b id="mp3"></b></p>
+        <p>OGG: <b id="ogg"></b></p>
+        <p>WAV: <b id="wav"></b></p>
+        <p>FLAC: <b id="flac"></b></p>
+        <p>AAC: <b id="aac"></b></p>
+        <p>AACP: <b id="aacp"></b></p>
+        <p>CAF: <b id="caf"></b></p>
+        <p>MP4: <b id="mp4"></b></p>
+        <p>WEBM: <b id="webm"></b></p>
         <script src="../build/pancake.js"></script>
         <script>
-            document.getElementById("crc2d").innerHTML = pancake.browser.support.CANVAS();
-            document.getElementById("crc2d").style.color = pancake.browser.support.CANVAS() ? "green" : "red";
-
-            document.getElementById("gamepad").innerHTML = pancake.browser.support.GAMEPAD();
-            document.getElementById("gamepad").style.color = pancake.browser.support.GAMEPAD() ? "green" : "red";
-
-            document.getElementById("mpeg").innerHTML = pancake.browser.support.MPEG();
-            document.getElementById("mpeg").style.color = pancake.browser.support.MPEG() ? "green" : "red";
-
-            document.getElementById("mp3").innerHTML = pancake.browser.support.MP3();
-            document.getElementById("mp3").style.color = pancake.browser.support.MP3() ? "green" : "red";
-
-            document.getElementById("ogg").innerHTML = pancake.browser.support.OGG();
-            document.getElementById("ogg").style.color = pancake.browser.support.OGG() ? "green" : "red";
-
-            document.getElementById("wav").innerHTML = pancake.browser.support.WAV();
-            document.getElementById("wav").style.color = pancake.browser.support.WAV() ? "green" : "red";
-
-            document.getElementById("mp4").innerHTML = pancake.browser.support.MP4();
-            document.getElementById("mp4").style.color = pancake.browser.support.MP4() ? "green" : "red";
+            var ctx2d = pancake.browser.support.CANVAS();
+            var ctxgl = pancake.browser.support.WEBGL();
+            var gamepad = pancake.browser.support.GAMEPAD();
+            var java = pancake.browser.support.JAVA();
+            var mpeg = pancake.browser.support.MPEG();
+            var mp3 = pancake.browser.support.MP3();
+            var ogg = pancake.browser.support.OGG();
+            var wav = pancake.browser.support.WAV();
+            var flac = pancake.browser.support.FLAC();
+            var aac = pancake.browser.support.AAC();
+            var aacp = pancake.browser.support.AACP();
+            var caf = pancake.browser.support.CAF();
+            var mp4 = pancake.browser.support.MP4();
+            var webm = pancake.browser.support.WEBM();
             
-            document.getElementById("webm").innerHTML = pancake.browser.support.WEBM();
-            document.getElementById("webm").style.color = pancake.browser.support.WEBM() ? "green" : "red";
+            document.getElementById("crc2d").innerHTML = ctx2d ? "YES" : "NO";
+            document.getElementById("crc2d").style.color = ctx2d ? "green" : "red";
+            
+            document.getElementById("gl").innerHTML = ctxgl ? "YES" : "NO";
+            document.getElementById("gl").style.color = ctxgl ? "green" : "red";
+
+            document.getElementById("gamepad").innerHTML = gamepad ? "YES" : "NO";
+            document.getElementById("gamepad").style.color = gamepad ? "green" : "red";
+            
+            document.getElementById("java").innerHTML = java ? "YES" : "NO";
+            document.getElementById("java").style.color = java ? "green" : "red";
+            
+            document.getElementById("mpeg").innerHTML = mpeg ? "YES" : "NO";
+            document.getElementById("mpeg").style.color = mpeg ? "green" : "red";
+
+            document.getElementById("mp3").innerHTML = mp3 ? "YES" : "NO";
+            document.getElementById("mp3").style.color = mp3 ? "green" : "red";
+
+            document.getElementById("ogg").innerHTML = ogg ? "YES" : "NO";
+            document.getElementById("ogg").style.color = ogg ? "green" : "red";
+
+            document.getElementById("wav").innerHTML = wav ? "YES" : "NO";
+            document.getElementById("wav").style.color = wav ? "green" : "red";
+            
+            document.getElementById("flac").innerHTML = flac ? "YES" : "NO";
+            document.getElementById("flac").style.color = flac ? "green" : "red";
+            
+            document.getElementById("aac").innerHTML = aac ? "YES" : "NO";
+            document.getElementById("aac").style.color = aac ? "green" : "red";
+            
+            document.getElementById("aacp").innerHTML = aacp ? "YES" : "NO";
+            document.getElementById("aacp").style.color = aacp ? "green" : "red";
+            
+            document.getElementById("caf").innerHTML = caf ? "YES" : "NO";
+            document.getElementById("caf").style.color = caf ? "green" : "red";
+            
+            document.getElementById("mp4").innerHTML = mp4 ? "YES" : "NO";
+            document.getElementById("mp4").style.color = mp4 ? "green" : "red";
+            
+            document.getElementById("webm").innerHTML = webm ? "YES" : "NO";
+            document.getElementById("webm").style.color = webm ? "green" : "red";
         </script>
         <style>
-            code { color: red; }
-            #text { color: black; }
+            b { color: red; }
+            #text { color: default; }
         </style>
     </body>
 </html>

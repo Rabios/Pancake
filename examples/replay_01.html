@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pancake - Rewind</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="400" height="400" style="background-color: black;"></canvas>
+        <script src="../build/pancake.js"></script>
+        <script>
+            // Use HTML <canvas> tags that has id "canvas"
+            pancake.context.use(document.getElementById("canvas"), 0);
+            pancake.replay.load(0);
+            var fr = 0;
+            
+            function game() {
+                // Clear
+                pancake.graphics.clear();
+                
+                // Get mouse position, If not get touch position (For mobile)
+                var px = p.i.mouse_x || p.i.touch_x;
+                var py = p.i.mouse_y || p.i.touch_y;
+                
+                // Draw player                
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
+                pancake.graphics.rect(px, py, 50, 50);
+                
+                // Check if we recorded 400 frames (2 seconds...)
+                if (!(pancake.replay.frames(0) == 400)) {
+                    fr++;
+                    pancake.replay.save(0, { frames: fr });
+                } else {
+                    //console.log(fr);
+                    pancake.replay.play(0);
+                }
+                
+                // To prevent input loop
+                // Required when using keyboard and mouse buttons
+                pancake.input.preventLoop();
+            }
+            
+            // Create timer for game loop
+            // And set timer to run at 60 frames per second,And use function game
+            var gameloop = pancake.timers.timer(game, 60);
+        </script>
+        <p>Move player with mouse for some time, And replay will run for what you did!</p>
+    </body>
+</html>

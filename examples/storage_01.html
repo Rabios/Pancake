@@ -12,15 +12,16 @@
         <br>
         <p id="log"></p>
         <br>
-        <p><b>NOTES: If you saved score,Reload the page and press "Show saved score" button to see load in action</b></p>
+        <p><b>NOTES: If you saved score, Reload the page and press "Show saved score" button to see load in action</b></p>
         <script src="../build/pancake.js"></script>
         <script>
-            if (window.localStorage === undefined) {
+            var score = 0;
+            
+            if (!window.localStorage) {
                 alert("Browser does not support offline localStorage,So online version will open");
                 pancake.browser.open("https://rabios.github.io/Pancake/examples/storage_01.html");
             }
-
-            var score = 0;
+            
             document.getElementById("more").onclick = function() {
                 score += 100;
                 document.getElementById("score").innerHTML = Number(score);

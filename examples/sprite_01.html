@@ -1,61 +1,56 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pancake - Sprites</title>
+        <title>Pancake - Sprite</title>
     </head>
     <body>
+        <canvas id="canvas" width="400" height="400" style="background-color: black;"></canvas>
         <script src="../build/pancake.js"></script>
         <script>
-            // Create canvas with size compatible on all devices,With index 0
-            // Create context for canvas has index 0 and set graphics to use it
-            // Set background color to black
-            pancake.canvas.create(400, 400, 0);
-            pancake.context.create(0, 0);
-            pancake.graphics.useContext(0);
-            pancake.graphics.setBackgroundColor("black");
-
-            // Index of sprite image
-            var sprite_image = 0;
-            var fps = 240;
-
-            // Create a sprite with it's images,And set index of the created sprite to 0
-            // NOTES: You need to cut your spritesheet to images in equivalent width and height
-            // HINT: You can use Piskel or any other tools for spritesheets cutting
-            pancake.sprite.create([
-                "sprite_01/01.png", "sprite_01/02.png", "sprite_01/03.png", "sprite_01/04.png",
-                "sprite_01/05.png", "sprite_01/06.png", "sprite_01/07.png", "sprite_01/08.png",
-                "sprite_01/09.png", "sprite_01/10.png", "sprite_01/11.png", "sprite_01/12.png"
-            ], 0);
-
-            function game() {
-                // Clear
-                pancake.graphics.clear();
-
-                // Get sprite then use array count for sprite images loop
-                // And draw sprite image in loop of sprite images
-                // There are 2 ways to get sprite image to draw it
-
-                // pancake.sprite.get(sprite_index)[image_index];
-                // pancake.sprites[sprite_index][image_index];
-
-                // I used the first way as it's better for beginners
-                pancake.graphics.image(pancake.sprite.get(0)[sprite_image], 100, 100, 128, 128);
-                
-                // When a second pass,Change sprite images (frames) to the next frame
-                // With restarting our sprite's timer
-                if (pancake.sprite.timers[0] >= pancake.timers.second) {
-                    pancake.sprite.timers[0] = 0;
-                    sprite_image++;
+            // Use HTML <canvas> tags that has id "canvas"
+            pancake.context.use(document.getElementById("canvas"), 0);
+            
+            var astonished = false;
+            
+            // Load sprite from spritesheet into index 0
+            // And assign states to the sprite, Can be customized!
+            // You can also set duration, start, end, current frame, current time of sprite draw!
+            // NOTE: Image by kenney, https://kenney.nl ;)
+            pancake.sprite.load("alienGreen.png", {
+                "walk": {
+                    duration: 6,
+                    info: [
+                        { x: 0, y: 0, w: 68, h: 96 },
+                        { x: 0, y: 96, w: 68, h: 96 },
+                        { x: 0, y: 192, w: 68, h: 96 },
+                        { x: 68, y: 192, w: 68, h: 94 },
+                    ]
+                },
+                "astonished": {
+                    duration: 6,
+                    info: [
+                        { x: 68, y: 286, w: 68, h: 93 }
+                    ]
                 }
-
-                // If length exceeded,Reset sprite animation
-                if(sprite_image >= pancake.sprites[0].length) sprite_image = 0;
-
-                // Increase timer over loop
-                pancake.sprite.timers[0]++;
+            }, 0);
+            
+            function game() {
+                pancake.graphics.clear();
+                
+                if (pancake.input.keydown(pancake.input.key.SPACE)) astonished = !astonished;
+                
+                if (!astonished) {
+                    pancake.sprite.draw(0, "walk", 100, 100, 68, 96);
+                } else {
+                    pancake.sprite.draw(0, "astonished", 100, 100, 68, 96);
+                }
+                
+                pancake.input.preventLoop();
             }
-
-            var gameloop = pancake.timers.timer(game, fps);
+            
+            // Create timer for game loop
+            // And set timer to run at 60 frames per second, And use function game
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
     </body>
 </html>

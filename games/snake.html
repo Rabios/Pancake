@@ -1,4 +1,4 @@
-<!-- This is a rewriting of Steven Lambert's Snake -->
+<!-- Port of Steven Lambert's Snake to Pancake -->
 <!-- https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4 -->
 <!--
     In this game we're going to learn:
@@ -14,23 +14,24 @@
     </head>
     <body>
         <script src="../build/pancake.js"></script>
-        <canvas id="canvas" onclick="pancake.graphics.toggleFullscreen();"></canvas>
         <script>
-            if (window.localStorage === undefined) {
-                alert("Browser does not support offline localStorage,So online version will open");
+            if (window.localStorage === void 0) {
+                alert("Browser does not support offline localStorage, So online version will open");
                 pancake.browser.open("https://rabios.github.io/Pancake/games/snake.html");
             }
 
             // Create context and set it external canvas with id "canvas"
             // Set created context index to 0
             // Set canvas index to 0,Since custom canvases can't have index
-            pancake.context.use(document.getElementById("canvas"), 0);
-
-            // Resize canvas to fit the window
-            pancake.canvas.resize(pancake.canvas.compatible_width, pancake.canvas.compatible_height, 0);
+            pancake.canvas.create(pancake.canvas.compatible_width, pancake.canvas.compatible_height, 0);
+            pancake.context.create(0, 0);
+            pancake.graphics.useContext(0);
+            pancake.graphics.context.canvas.onclick = function() {
+                pancake.graphics.toggleFullscreen();
+            };
             
             // Set background color
-            pancake.graphics.setBackgroundColor("black");
+            pancake.graphics.setBackgroundColor(pancake.graphics.RGB(0, 0, 0));
             
             var grid_size = 32;
             var count = 0, score = 0, highscore = Number(pancake.storage.load("highscore")) || 0;
@@ -50,7 +51,7 @@
             var apple = { x: 120, y: 120 };
 
             function game() {
-                window.animate(game, 120);
+                pancake.timers.animate(game, 1000 / 60);
                 
                 // Slow game loop to 30 fps instead of 120 (120 / 30 = 4)
                 if (++count < 4) {
@@ -58,6 +59,7 @@
                 }
                 
                 count = 0;
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 0, 255));
                 pancake.graphics.clear();
 
                 // Update snake position
@@ -65,12 +67,12 @@
                 snake.y += snake.vy;
                 
                 // Wrap snake position horizontally on edge of screen
-                if (snake.x < 0) snake.x = canvas.width - grid_size;
-                else if (snake.x >= canvas.width) snake.x = 0;
+                if (snake.x < 0) snake.x = pancake.graphics.context.canvas.width - grid_size;
+                else if (snake.x >= pancake.graphics.context.canvas.width) snake.x = 0;
                 
                 // Wrap snake position vertically on edge of screen
-                if (snake.y < 0) snake.y = canvas.height - grid_size;
-                else if (snake.y >= canvas.height) snake.y = 0;
+                if (snake.y < 0) snake.y = pancake.graphics.context.canvas.height - grid_size;
+                else if (snake.y >= pancake.graphics.context.canvas.height) snake.y = 0;
 
                 // Keep track of where snake has been. Front of the array is always the head
                 snake.cells.unshift({ x: snake.x, y: snake.y });
@@ -78,19 +80,17 @@
                 // Remove cells as we move away from them
                 if (snake.cells.length > snake.maxCells) snake.cells.pop();
 
-                pancake.graphics.mode = pancake.graphics.FILL;
-
                 // Draw apple
-                pancake.graphics.color("blue");
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
                 pancake.graphics.square(apple.x, apple.y, grid_size);
 
                 // Draw snake one cell at a time
-                pancake.graphics.color("dodgerblue");
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 200));
                 snake.cells.forEach(function(cell, index) {
                     pancake.graphics.square(cell.x, cell.y, grid_size);  
                     
                     // Snake ate apple
-                    if (pancake.physics.checkCollisionRect(cell.x, cell.y, 32, 32, apple.x, apple.y, 32, 32)) {
+                    if (pancake.physics.checkCollisionRecs(cell.x, cell.y, 32, 32, apple.x, apple.y, 32, 32)) {
                         snake.maxCells++;
                         score = snake.maxCells - 1;
                         apple.x = pancake.util.random(Math.floor(pancake.canvas.compatible_width / 32)) * grid_size;
@@ -123,7 +123,7 @@
                 }
 
                 // Draw score
-                pancake.graphics.color("blue");
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
                 pancake.graphics.setFont("Monospace", 64);
                 pancake.graphics.text(score, 32, 64);
                 
@@ -151,36 +151,36 @@
                 // Check gamepad support and first gamepad connected
                 if (pancake.browser.support.GAMEPAD() && pancake.input.gamepadConnected(0)) {
                     // Analog controls
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_UP, "UP")) {
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "UP")) {
                         snake.vy = -grid_size, snake.vx = 0;
                     }
 
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_DOWN, "DOWN")) {
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "DOWN")) {
                         snake.vy = grid_size, snake.vx = 0;
                     }
 
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_LEFT, "LEFT")) {
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "LEFT")) {
                         snake.vx = -grid_size, snake.vy = 0;
                     }
 
-                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, pancake.input.GAMEPAD_ANALOG_RIGHT, "RIGHT")) {
+                    if (pancake.input.gamepadAnalogMoved(0, pancake.input.GAMEPAD_MOVE_ANALOG, "RIGHT")) {
                         snake.vx = grid_size, snake.vy = 0;
                     }
                     
                     // DPAD Controls
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.UP, 0)) {
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.UP)) {
                         snake.vy = -grid_size, snake.vx = 0;
                     }
 
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.DOWN, 0)) {
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.DOWN)) {
                         snake.vy = grid_size, snake.vx = 0;
                     }
 
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.LEFT, 0)) {
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.LEFT)) {
                         snake.vx = -grid_size, snake.vy = 0;
                     }
 
-                    if (pancake.input.gamepadButtonPressed(pancake.input.button.RIGHT, 0)) {
+                    if (pancake.input.gamepadButtonPressed(0, pancake.input.button.RIGHT)) {
                         snake.vx = grid_size, snake.vy = 0;
                     }
                 }
@@ -188,7 +188,7 @@
                 pancake.input.preventLoop();
             }
             
-            window.animate(game, 120);
+            pancake.timers.animate(game, 1000 / 60);
         </script>
     </body>
 </html>

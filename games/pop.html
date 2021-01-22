@@ -20,7 +20,9 @@
             pancake.graphics.setBackgroundColor("black");
 
             var seconds = 10;
-            var score = 0, timer = 0;
+            var score = 0;
+            timer = 0;
+            
             // Store game scenes(levels) in array
             var scenes = [], scene = 0;
             var frames_per_second = 120;
@@ -35,12 +37,12 @@
             // First scene (game)
             scenes[0] = function() {
                 // Draw circle
-                pancake.graphics.mode = pancake.graphics.FILL;
-                pancake.graphics.color(circle.color, "white");
+                pancake.graphics.setMode(pancake.graphics.FILL);
+                pancake.graphics.color(circle.color, pancake.graphics.RGB(255, 255, 255));
                 pancake.graphics.circle(circle.x, circle.y, circle.r);
                 
                 // Draw score and seconds
-                pancake.graphics.mode = pancake.graphics.STROKE;
+                pancake.graphics.setMode(pancake.graphics.STROKE);
                 pancake.graphics.setFont("Monospace", 32);
                 pancake.graphics.text("Score: " + score, 10, 40);
                 pancake.graphics.text("Seconds: " + seconds, 10, 80);
@@ -48,7 +50,7 @@
                 // If clicked or tapped
                 if (pancake.input.click || pancake.input.tap) {
                     // Draw transparent square to check collision at mouse/touch position
-                    pancake.graphics.color(circle.color, "transparent");
+                    pancake.graphics.color(circle.color, pancake.graphics.RGBA(0, 0, 0, 0));
                     pancake.graphics.square(pancake.input.mouse_x || pancake.input.touch_x, pancake.input.mouse_y || pancake.input.touch_y, 10);
 
                     // Check collision and if true
@@ -62,7 +64,7 @@
                 }
 
                 // If second pass, Decrease second
-                if (timer >= pancake.timers.second) {
+                if (timer >= 60) {
                     timer = 0, seconds--;
                 }
 

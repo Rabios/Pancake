@@ -5,11 +5,8 @@
     </head>
     <body>
         <canvas id="canvas"></canvas>
-        <script src="../build/pancake.min.js"></script>
+        <script src="../build/pancake.js"></script>
         <script>
-            // If MP4 supported then load video
-            if(pancake.browser.support.MP4()) pancake.video.load("video.mp4", 0);
-
             // Set <canvas> tags that has id "canvas" index to 0
             pancake.context.use(document.getElementById("canvas"), 0);
 
@@ -23,8 +20,15 @@
             // Set canvas background color
             pancake.graphics.setBackgroundColor("black");
             pancake.graphics.setFont("Arial", 24);
-            pancake.graphics.color("white");
-
+            pancake.graphics.color(pancake.graphics.RGB(255, 255, 255));
+            
+            // If MP4 supported then load video
+            if (pancake.browser.support.MP4()) pancake.video.load("video.mp4", 0);
+            
+            // This video will loop after play
+            // If you uncomment the line below and comment both else statement part from 53 to 56
+            // pancake.video.setLoop(true, 0);
+            
             // To check if video played
             var playvideo = false;
 
@@ -36,15 +40,20 @@
                 if (!playvideo) pancake.graphics.text("Click on canvas to play video", 10, 30);
                 
                 // If clicked or tapped,Play video 
-                if (pancake.input.tap || pancake.input.click) playvideo = true;
+                if (pancake.input.tap || pancake.input.click && !playvideo) playvideo = true;
                 
                 // You can also add x, y, w, h to set video dimensions and position
                 // pancake.video.play(video_index)
                 // pancake.video.play(video_index, x, y, w, h)
                 if (playvideo) {
-                    // If MP4 supported then play video,If not alert!
+                    // If MP4 supported then play video, If not alert!
                     if (pancake.browser.support.MP4()) {
-                        pancake.video.play(0);
+                        if (!pancake.video.finished(0)) {
+                            pancake.video.play(0);
+                        } else {
+                            pancake.video.reset(0); // Use reset only if your loaded video loop is false
+                            playvideo = false;
+                        }
                     } else {
                         alert("ERROR: MP4 is not supported!");
                     }
@@ -54,7 +63,7 @@
                 pancake.input.preventLoop();
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
     </body>
 </html>

@@ -7,7 +7,7 @@
         <script src="../build/pancake.js"></script>
         <script>
             // Player color to change
-            var player_color = "blue";
+            var player_color = pancake.graphics.RGB(0, 0, 255);
 
             // Create canvas with size compatible on all devices,With index 0
             // Create context for canvas has index 0 and set graphics to use it
@@ -20,27 +20,37 @@
             function game() {
                 // Clear
                 pancake.graphics.clear();
-
-                // Draw player,Following mouse
+                
+                // Drawing shapes that we will check collision with them
+                pancake.graphics.color(pancake.graphics.RGB(255, 0, 0), pancake.graphics.RGB(255, 0, 0));
+                pancake.graphics.rect(100, 150, 50, 50);
+                pancake.graphics.circle(300, 80, 40);
+                pancake.graphics.line(500, 200, 700, 500);
+                pancake.graphics.triangle(100, 500, 300, 300, 500, 400);
+                pancake.graphics.line(800, 100, 700, 250);
+                pancake.graphics.line(700, 250, 900, 300);
+                pancake.graphics.line(900, 300, 1000, 200);
+                pancake.graphics.line(1000, 200, 800, 100);
+                
+                
+                // Draw player following mouse
                 pancake.graphics.color(player_color);
                 pancake.graphics.rect(pancake.input.mouse_x, pancake.input.mouse_y, 50, 50);
-                
-                // Drawing shapes that we will check collision on it
-                pancake.graphics.color("red");
-                pancake.graphics.rect(300, 300, 50, 50);
-                pancake.graphics.circle(300, 80, 40);
 
                 // If collision between player and rectangle or player and circle
                 // Remember: The player is a rectangle
-                if (pancake.physics.checkCollisionRect(pancake.input.mouse_x, pancake.input.mouse_y, 50, 50, 300, 300, 50, 50) ||
-                    pancake.physics.checkCollisionCircleRect(300, 80, 40, pancake.input.mouse_x, pancake.input.mouse_y, 50, 50)) {
-                        player_color = "purple";
+                if (pancake.physics.checkCollisionRecs(pancake.input.mouse_x, pancake.input.mouse_y, 50, 50, 100, 150, 50, 50) ||
+                    pancake.physics.checkCollisionCircleRect(300, 80, 40, pancake.input.mouse_x, pancake.input.mouse_y, 50, 50) ||
+                    pancake.physics.checkCollisionRectLine(pancake.input.mouse_x, pancake.input.mouse_y, 50, 50, 500, 200, 700, 500) ||
+                    pancake.physics.checkCollisionTriangleRect(100, 500, 300, 300, 500, 400, pancake.input.mouse_x, pancake.input.mouse_y, 50, 50) ||
+                    pancake.physics.checkCollisionPolygonRect([ { x: 800, y: 100 }, { x: 700, y: 250 }, { x: 900, y: 300 }, { x: 1000, y: 200 } ], pancake.input.mouse_x, pancake.input.mouse_y, 50, 50)) {
+                        player_color = pancake.graphics.RGB(255, 0, 255);
                     } else {
-                        player_color = "blue";
+                        player_color = pancake.graphics.RGB(0, 0, 255);
                     }
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
     </body>
 </html>

@@ -9,7 +9,7 @@
         <script>
             // Create context and set it external canvas with id "canvas"
             // Set created context index to 0
-            // Set canvas index to 0,Since custom canvases can't have index
+            // Set canvas index to 0, Since custom canvases can't have index
             pancake.context.use(document.getElementById("canvas"), 0);
 
             // Resize canvas to fit the window
@@ -23,7 +23,7 @@
                 pancake.graphics.clear();
 
                 // Draw info text
-                pancake.graphics.color("white");
+                pancake.graphics.color(pancake.graphics.RGB(255, 255, 255));
                 pancake.graphics.setFont("Arial", 32);
                 pancake.graphics.text("Click on canvas to toggle fullscreen", 10, 32);
 
@@ -31,7 +31,7 @@
                 pancake.input.preventLoop();
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
     </body>
 </html>

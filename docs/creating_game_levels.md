@@ -1,6 +1,7 @@
-# Creating game levels/scenes with Pancake
+# Game Levels/Scenes creation
 
-There is a lot of ways to do,Like this one:
+There is a lot of ways to do, Like this one:
+
 ```javascript
 var current_game_level = 1;
 var game = pancake.timers.timer(function() {
@@ -18,6 +19,7 @@ function level_2() {
 ```
 
 Or this one:
+
 ```javascript
 var level = 0;
 var levels = [];

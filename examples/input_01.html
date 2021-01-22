@@ -4,7 +4,6 @@
         <title>Pancake - Keyboard input</title>
     </head>
     <body>
-        <p>Move player with arrow keys,or WASD</p>
         <canvas id="canvas" width="400" height="400" style="background-color: black;"></canvas>
         <script src="../build/pancake.js"></script>
         <script>
@@ -13,48 +12,49 @@
             var py = 200;
 
             // For both keydown and keyup
-            var move_player_up = false;
-            var move_player_down = false;
-            var move_player_left = false;
-            var move_player_right = false;
+            var move_up = false;
+            var move_down = false;
+            var move_left = false;
+            var move_right = false;
 
             // Use HTML <canvas> tags that has id "canvas"
             pancake.context.use(document.getElementById("canvas"), 0);
-
+            
             function game() {
                 // Clear
                 pancake.graphics.clear();
                 
                 // Draw player
-                pancake.graphics.color("blue");
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 255));
                 pancake.graphics.rect(px, py, 50, 50);
 
                 // If key down,Set movement to true
-                if (pancake.input.keydown(pancake.input.key.W) || pancake.input.keydown(pancake.input.key.UP)) move_player_up = true;
-                if (pancake.input.keydown(pancake.input.key.S) || pancake.input.keydown(pancake.input.key.DOWN)) move_player_down = true;
-                if (pancake.input.keydown(pancake.input.key.A) || pancake.input.keydown(pancake.input.key.LEFT)) move_player_left = true;
-                if (pancake.input.keydown(pancake.input.key.D) || pancake.input.keydown(pancake.input.key.RIGHT)) move_player_right = true;
+                if (pancake.input.keydown(pancake.input.key.W) || pancake.input.keydown(pancake.input.key.UP)) move_up = true;
+                if (pancake.input.keydown(pancake.input.key.S) || pancake.input.keydown(pancake.input.key.DOWN)) move_down = true;
+                if (pancake.input.keydown(pancake.input.key.A) || pancake.input.keydown(pancake.input.key.LEFT)) move_left = true;
+                if (pancake.input.keydown(pancake.input.key.D) || pancake.input.keydown(pancake.input.key.RIGHT)) move_right = true;
 
                 // If key up with same keys,Set movement to false
-                if (pancake.input.keyup(pancake.input.key.W) || pancake.input.keyup(pancake.input.key.UP)) move_player_up = false;
-                if (pancake.input.keyup(pancake.input.key.S) || pancake.input.keyup(pancake.input.key.DOWN)) move_player_down = false;
-                if (pancake.input.keyup(pancake.input.key.A) || pancake.input.keyup(pancake.input.key.LEFT)) move_player_left = false;
-                if (pancake.input.keyup(pancake.input.key.D) || pancake.input.keyup(pancake.input.key.RIGHT)) move_player_right = false;
-
+                if (pancake.input.keyup(pancake.input.key.W) || pancake.input.keyup(pancake.input.key.UP)) move_up = false;
+                if (pancake.input.keyup(pancake.input.key.S) || pancake.input.keyup(pancake.input.key.DOWN)) move_down = false;
+                if (pancake.input.keyup(pancake.input.key.A) || pancake.input.keyup(pancake.input.key.LEFT)) move_left = false;
+                if (pancake.input.keyup(pancake.input.key.D) || pancake.input.keyup(pancake.input.key.RIGHT)) move_right = false;
+                
                 // For player movement
-                if (move_player_up) py -= 5;
-                if (move_player_down) py += 5;
-                if (move_player_left) px -= 5;
-                if (move_player_right) px += 5;
-
+                if (move_up) py -= 5;
+                if (move_down) py += 5;
+                if (move_left) px -= 5;
+                if (move_right) px += 5;
+                
                 // To prevent input loop
                 // Required when using keyboard and mouse buttons
                 pancake.input.preventLoop();
             }
             
             // Create timer for game loop
-            // And set timer to run at 120 frames per second,And use function game
-            var gameloop = pancake.timers.timer(game, 120);
+            // And set timer to run at 60 frames per second, And use function game
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
+        <p>Move player with arrow keys, or WASD</p>
     </body>
 </html>

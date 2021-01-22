@@ -5,7 +5,6 @@
     </head>
     <body>
         <script src="../build/pancake.js"></script>
-        <p>This example describes how to make AI that follows path in Pancake</p>
         <canvas id="canvas" width="400" height="400" style="background-color: black;"></canvas>
         <script>
             // Use canvas directly
@@ -35,13 +34,9 @@
                 // Clear
                 pancake.graphics.clear();
 
-                // Draw blue circle represents player
-                pancake.graphics.color("dodgerblue");
-                pancake.graphics.circle(c.x, c.y, c.r);
-
                 // Draw rectangles
-                pancake.graphics.color("red", "red");
-                for (var i = 0;i < rects.length;i++) {
+                pancake.graphics.color(pancake.graphics.RGB(255, 0, 0), pancake.graphics.RGB(255, 0, 0));
+                for (var i = 0;i < rects.length; i++) {
                     if(rects[i][4]) pancake.graphics.rect(rects[i][0], rects[i][1], rects[i][2], rects[i][3]);
                 }
 
@@ -53,27 +48,32 @@
                     pancake.graphics.line(rects[rects.length - 3][0], rects[rects.length - 3][1], rects[rects.length - 2][0], rects[rects.length - 2][1]);
                     pancake.graphics.line(rects[rects.length - 2][0], rects[rects.length - 2][1], rects[rects.length - 1][0], rects[rects.length - 1][1]);
                 }
+                
+                // Draw blue circle represents player
+                pancake.graphics.color(pancake.graphics.RGB(0, 0, 220));
+                pancake.graphics.circle(c.x, c.y, c.r);
 
                 // If target alive
                 // Get distance between player and him
                 // Then divide distance to use it as speed
-                if(rects[next_target][4]) {
-                    pancake.physics.getDistance(c.x, c.y, rects[next_target][0], rects[next_target][1]);
-                    c.vx = pancake.physics.distance_x / 20; // To set speed X
-                    c.vy = pancake.physics.distance_y / 20; // To set speed Y
+                if (rects[next_target][4]) {
+                    var dst = pancake.physics.getDistance(c.x, c.y, rects[next_target][0], rects[next_target][1]);
+                    c.vx = dst.x / 20; // To set speed X
+                    c.vy = dst.y / 20; // To set speed Y
                 }
 
                 // Check collision between target and player
                 // If true then destroy rectangle
                 if (pancake.physics.checkCollisionCircleRect(c.x, c.y, c.r, rects[next_target][0], rects[next_target][1], rects[next_target][2], rects[next_target][3])) {
                     rects[next_target][4] = false;
-                    next_target++;
+                    if (rects[next_target + 1][4] !== void 0) next_target++;
                 }
 
                 pancake.input.preventLoop();
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
+        <p>This example describes how to make AI that follows path in Pancake</p>
     </body>
 </html>

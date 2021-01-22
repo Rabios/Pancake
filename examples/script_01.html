@@ -9,17 +9,13 @@
         <button id="run-script">Run some code</button>
         <script>
             document.getElementById("add-script").onclick = function() {
-
-                // Load script my_script.js to scripts index 0
-                pancake.script.load("my_script.js", 0);
-
+                // Load script my_script.js
+                pancake.script.loadSource("my_script.js");
             };
 
             document.getElementById("run-script").onclick = function() {
-
-                // Run and eval a javascript code
-                pancake.script.eval("window.alert(multiply(5, 3));");
-                
+                // Run JavaScript code
+                window.alert(multiply(5, 3));    
             };
         </script>
     </body>

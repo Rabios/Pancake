@@ -5,38 +5,42 @@
     </head>
     <body>
         <h1>What is your browser?</h1>
-        <p>Google Chrome: <code id="chrome"></code></p>
-        <p>Mozilla Firefox: <code id="firefox"></code></p>
-        <p>Apple Safari: <code id="safari"></code></p>
-        <p>Opera Browser: <code id="opera"></code></p>
-        <p>Microsoft Edge: <code id="edge"></code></p>
-        <p>Microsoft Internet Explorer: <code id="ie"></code></p>
-        <p>Maxthon: <code id="maxthon"></code></p>
-        <p>Mozilla SeaMonkey: <code id="seamonkey"></code></p>
+        <p>Google Chrome: <b id="chrome"></b></p>
+        <p>Mozilla Firefox: <b id="firefox"></b></p>
+        <p>Apple Safari: <b id="safari"></b></p>
+        <p>Opera: <b id="opera"></b></p>
+        <p>Opera Mini: <b id="opera-mini"></b></p>
+        <p>Microsoft Edge: <b id="edge"></b></p>
+        <p>Microsoft Internet Explorer: <b id="ie"></b></p>
+        <p>Maxthon: <b id="maxthon"></b></p>
+        <p>Mozilla SeaMonkey: <b id="seamonkey"></b></p>
         <script src="../build/pancake.js"></script>
         <script>
-            document.getElementById("chrome").innerHTML = pancake.browser.CHROME;
+            document.getElementById("chrome").innerHTML = pancake.browser.CHROME ? "YES" : "NO";
             document.getElementById("chrome").style.color = pancake.browser.CHROME ? "green" : "red";
 
-            document.getElementById("firefox").innerHTML = pancake.browser.FIREFOX;
+            document.getElementById("firefox").innerHTML = pancake.browser.FIREFOX ? "YES" : "NO";
             document.getElementById("firefox").style.color = pancake.browser.FIREFOX ? "green" : "red";
 
-            document.getElementById("safari").innerHTML = pancake.browser.SAFARI;
+            document.getElementById("safari").innerHTML = pancake.browser.SAFARI ? "YES" : "NO";
             document.getElementById("safari").style.color = pancake.browser.SAFARI ? "green" : "red";
             
-            document.getElementById("opera").innerHTML = pancake.browser.OPERA;
+            document.getElementById("opera").innerHTML = pancake.browser.OPERA ? "YES" : "NO";
             document.getElementById("opera").style.color = pancake.browser.OPERA ? "green" : "red";
             
-            document.getElementById("edge").innerHTML = pancake.browser.EDGE;
+            document.getElementById("opera-mini").innerHTML = pancake.browser.OPERA_MINI ? "YES" : "NO";
+            document.getElementById("opera-mini").style.color = pancake.browser.OPERA_MINI ? "green" : "red";
+            
+            document.getElementById("edge").innerHTML = pancake.browser.EDGE ? "YES" : "NO";
             document.getElementById("edge").style.color = pancake.browser.EDGE ? "green" : "red";
             
-            document.getElementById("ie").innerHTML = pancake.browser.IE;
+            document.getElementById("ie").innerHTML = pancake.browser.IE ? "YES" : "NO";
             document.getElementById("ie").style.color = pancake.browser.IE ? "green" : "red";
             
-            document.getElementById("maxthon").innerHTML = pancake.browser.MAXTHON;
+            document.getElementById("maxthon").innerHTML = pancake.browser.MAXTHON ? "YES" : "NO";
             document.getElementById("maxthon").style.color = pancake.browser.MAXTHON ? "green" : "red";
 
-            document.getElementById("seamonkey").innerHTML = pancake.browser.SEAMONKEY;
+            document.getElementById("seamonkey").innerHTML = pancake.browser.SEAMONKEY ? "YES" : "NO";
             document.getElementById("seamonkey").style.color = pancake.browser.SEAMONKEY ? "green" : "red";
         </script>
     </body>

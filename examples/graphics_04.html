@@ -4,7 +4,6 @@
         <title>Pancake - Color modes</title>
     </head>
     <body>
-        <p><b>Press Space key to change color mode</b></p>
         <p id="color-mode"></p>
         <canvas id="canvas" width="400" height="400" style="background-color: black;"></canvas>
         <script src="../build/pancake.js"></script>
@@ -22,23 +21,20 @@
                 pancake.graphics.HSL(120, 100, 50),
 
                 // Hex color from CSS
-                pancake.graphics.HEX("ff0000"),
-
-                // Color string
-                "purple"
+                pancake.graphics.HEX("ff0000")
+            ];
+            
+            // To change document color mode info
+            var color_modes = [
+                "RGB",
+                "HSL",
+                "Hex"
             ];
 
             // Set color to be first color
             var color_index = 0;
             var main_color = colors[color_index];
-
-            // To change document color mode info
-            var color_modes = [
-                "RGB",
-                "HSL",
-                "Hex",
-                "string"
-            ];
+            
             document.getElementById("color-mode").innerHTML = "Color mode: " + color_modes[color_index];
            
             function game() {
@@ -53,7 +49,7 @@
 
                 // If space key pressed
                 // NOTES: You can still use event.keyCode from HTML5
-                if (pancake.input.keypress(32)) {
+                if (pancake.input.keydown(32)) {
                     // Change color
                     color_index++
 
@@ -68,7 +64,8 @@
                 pancake.input.preventLoop();
             }
 
-            var gameloop = pancake.timers.timer(game, 120);
+            var gameloop = pancake.timers.timer(game, 60);
         </script>
+        <p><b>Press Space key to change color mode</b></p>
     </body>
 </html>
