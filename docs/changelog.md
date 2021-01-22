@@ -58,8 +58,9 @@ pancake.script.eval					// Use window.eval instead
 pancake.input.keypress				// Use pancake.input.keydown, or pancake.input.keyup instead for not repeat key press in game-loop
 ```
 
-40. Redesigned collision detection with canvas sides, So it uses object instead!
-41. Added new collision detection functions, Following were added:
+42. Renamed some Physics functions, It's better to take look [here!](https://github.com/Rabios/Pancake/blob/master/docs/api.md#pancakephysics).
+43. Redesigned collision detection with canvas sides, So it uses object instead!
+44. Added new collision detection functions, Following were added:
 
 ```js
 pancake.physics.checkCollisionCirclePoint
@@ -80,12 +81,12 @@ pancake.physics.checkCollisionPolygonCircle
 pancake.physics.checkCollisionPolygonTriangle
 ```
 
-42. Added `pancake.graphics.setTint(r, g, b, a)` and `pancake.graphics.disableTint()` to manipulate image tint!
-43. Improved check for Internet Explorer!
-44. Added check for more audio formats (AAC, AACP, CAF, FLAC)!
-44. Renamed `pancake.graphics.erase` to `pancake.graphics.clearRect`.
-45. Fixed problem in `pancake.context.set`, From first pull request.
-46. Added `pancake.graphics.setMode` to set graphics mode.
+45. Added `pancake.graphics.setTint(r, g, b, a)` and `pancake.graphics.disableTint()` to manipulate image tint!
+46. Improved check for Internet Explorer!
+47. Added check for more audio formats (AAC, AACP, CAF, FLAC)!
+48. Renamed `pancake.graphics.erase` to `pancake.graphics.clearRect`.
+49. Fixed problem in `pancake.context.set`, From first pull request.
+50. Added `pancake.graphics.setMode` to set graphics mode.
 
 ### v0.0.12 (Update 12)
 
