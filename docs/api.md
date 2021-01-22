@@ -319,7 +319,7 @@ pancake.browser.EDGE                                         // Returns if brows
 pancake.browser.IE                                           // Returns if browser is Internet Explorer
 pancake.browser.SAMSUNG_INTERNET                             // Returns if browser is Samsung Internet Browser
 pancake.browser.MAXTHON                                      // Returns if browser is Maxthon
-pancake.browser.SEAMONKEY                                   // Returns if browser is Seamonkey
+pancake.browser.SEAMONKEY                                    // Returns if browser is Seamonkey
 
 
 // Functions
