@@ -73,7 +73,7 @@ p.g.fit = function() {
 };
 
 p.g.fullscreen = function() {
-    return d.fullscreen || d.webkitIsFullScreen || d.mozFullscreen;
+    return d.fullscreen || d.webkitIsFullScreen || d.mozFullScreen;
 };
 
 p.g.toggleFullscreen = function() {
