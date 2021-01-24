@@ -87,6 +87,7 @@ pancake.physics.checkCollisionPolygonTriangle
 48. Renamed `pancake.graphics.erase` to `pancake.graphics.clearRect`.
 49. Fixed problem in `pancake.context.set`, From first pull request.
 50. Fixed fullscreen detection for Mozilla-vendor browsers!
+51. Fixed `pancake.timers.dt()` and added `pancake.timers.fps()`.
 
 ### v0.0.12 (Update 12)
 

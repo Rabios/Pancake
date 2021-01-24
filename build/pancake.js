@@ -1560,9 +1560,13 @@ p.t.interval = function(f, ms) {
 
 p.t.dt = function() {
     p.t.t2 = da();
-    p.t.rdt = 1000 / (p.t.t2 - p.t.t1);
-    p.t.t1 = p.t.t2;
+    p.t.rdt = p.t.t2 - p.t.t1;
+	p.t.t1 = p.t.t2;
     return p.t.rdt;
+};
+
+p.t.fps = function() {
+    return (1000 / p.t.dt());
 };
 
 p.t.timer = function(f, fps) {
@@ -1576,6 +1580,7 @@ p.t.animate = function(f) {
 p.t.pause = function(t) {
     return (w.clearTimeout || w.clearInterval || w.cancelAnimationFrame)(t);
 };
+
 p.v = {};
 p.videos = [];
 

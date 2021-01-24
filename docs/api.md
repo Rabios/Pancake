@@ -258,7 +258,8 @@ pancake.video.reset(video_index)                             // Resets video (On
 // Functions
 pancake.timers.countdown(f, ms)                              // Same as window.setTimeout
 pancake.timers.interval(f, ms)                               // Same as window.setInterval
-pancake.timers.dt()                                          // Returns deltaTime
+pancake.timers.dt()                                          // Returns current deltaTime
+pancake.timers.fps()                                         // Returns current FPS
 pancake.timers.timer(f, frames_per_second)                   // Sets interval then run function (frames per second integer from 0 to any)
 pancake.timers.pause(timer_variable)                         // Pauses countdown or interval
 pancake.timers.animate(f, milliseconds)                      // Improved version of window.requestAnimationFrame(), With framerate
