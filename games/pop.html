@@ -37,12 +37,12 @@
             // First scene (game)
             scenes[0] = function() {
                 // Draw circle
-                pancake.graphics.setMode(pancake.graphics.FILL);
+                pancake.graphics.mode = pancake.graphics.FILL;
                 pancake.graphics.color(circle.color, pancake.graphics.RGB(255, 255, 255));
                 pancake.graphics.circle(circle.x, circle.y, circle.r);
                 
                 // Draw score and seconds
-                pancake.graphics.setMode(pancake.graphics.STROKE);
+                pancake.graphics.mode = pancake.graphics.STROKE;
                 pancake.graphics.setFont("Monospace", 32);
                 pancake.graphics.text("Score: " + score, 10, 40);
                 pancake.graphics.text("Seconds: " + seconds, 10, 80);

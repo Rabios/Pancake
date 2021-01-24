@@ -87,7 +87,6 @@ pancake.graphics.toggleFullscreen()                           // Toggle fullscre
 pancake.graphics.exitFullscreen()                             // Exit fullscreen
 pancake.graphics.screenshot(canvas_index)                     // Takes screenshot of a canvas (You can ignore using canvas_index so it works on first canvas)
 pancake.graphics.useContext(context_index)                    // Sets context for drawing
-pancake.graphics.setMode(mode)                                // Sets graphics mode for drawing!
 pancake.graphics.setContext(context, context_index)           // Sets context or add it to index
 pancake.graphics.setAlpha(a)                                  // Sets alpha
 pancake.graphics.RGB(r, g, b)                                 // Returns RGB color
@@ -102,8 +101,6 @@ pancake.graphics.setFont(font_name, font_size)                // Sets font
 pancake.graphics.clear()                                      // Clear canvas
 pancake.graphics.text(text, x, y)                             // Draw text
 pancake.graphics.rect(x, y, w, h)                             // Draw rectangle
-pancake.graphics.setTint(r, g, b, a)                          // Sets image tint for drawing images, Disable tint by setting pancake.graphics.tint to null
-pancake.graphics.disableTint()                                // Disables tint
 pancake.graphics.roundedRect(x, y, w, h, r)                   // Draw rounded rectangle
 pancake.graphics.circle(x, y, r)                              // Draw circle
 pancake.graphics.line(x1, y1, x2, y2)                         // Draw line

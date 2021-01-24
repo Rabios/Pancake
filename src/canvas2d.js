@@ -47,10 +47,6 @@ p.g.fit = function() {
     p.g.fits = !0;
 };
 
-p.g.setMode = function(i) {
-    p.g.mode = i;
-};
-
 p.g.fullscreen = function() {
     return (d.fullscreen || d.webkitIsFullScreen || d.mozFullScreen);
 };
@@ -171,14 +167,6 @@ p.g.rect = function(x, y, w, h) {
     f.rect(x, y, w, h);
     f.closePath();
     p.g.render(v, f);
-};
-
-p.g.setTint = function(r, g, b, a) {
-    p.g.tint = p.g.RGBA(r, g, b, a);
-};
-
-p.g.disableTint = function() {
-    p.g.tint = u;
 };
 
 p.g.roundedRect = function(x, y, w, h, r) {

@@ -118,18 +118,6 @@ p.g.useContext = function(context_index) {
     p.g.pr = po.p;
 };
 
-p.g.setTint = function(r, g, b, a) {
-    p.g.tint = po.c.tint = p.g.RGBA(r, g, b, a);
-};
-
-p.g.disableTint = function() {
-    p.g.tint = po.c.tint = [1,1,1,p.g.alpha];
-};
-
-p.g.setMode = function(i) {
-    p.g.mode = po.c.mode = i;
-};
-
 p.g.RGB = po.co.RGB;
 p.g.RGBA = po.co.RGBA;
 p.g.HSL = po.co.HSL;

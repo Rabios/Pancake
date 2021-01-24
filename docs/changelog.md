@@ -81,13 +81,12 @@ pancake.physics.checkCollisionPolygonCircle
 pancake.physics.checkCollisionPolygonTriangle
 ```
 
-45. Added `pancake.graphics.setTint(r, g, b, a)` and `pancake.graphics.disableTint()` to manipulate image tint!
+45. Added `pancake.graphics.tint` for manipulating image tint!
 46. Improved check for Internet Explorer!
 47. Added check for more audio formats (AAC, AACP, CAF, FLAC)!
 48. Renamed `pancake.graphics.erase` to `pancake.graphics.clearRect`.
 49. Fixed problem in `pancake.context.set`, From first pull request.
-50. Added `pancake.graphics.setMode` to set graphics mode.
-51. Fixed fullscreen detection for Mozilla-vendor browsers!
+50. Fixed fullscreen detection for Mozilla-vendor browsers!
 
 ### v0.0.12 (Update 12)
 
