@@ -1,7 +1,7 @@
 # Pancake
 
 <div align="center">
-	<img src="pancake.png" width="256", height="256"><br>
+	<img src="https://github.com/Rabios/Pancake/blob/master/pancake.png" width="256", height="256"><br>
 	<p><q>Lightweight, Fast, Easy-to-use HTML5 game programming library/Game framework for all purposes!</q></p>
 </div><br>
 <br>
@@ -87,7 +87,7 @@ pancake.graphics.color(pancake.graphics.RGB(255, 255, 0));
 pancake.graphics.line(100, 100, 200, 200, 5);
 
 // Set drawing mode to stroke
-pancake.graphics.setMode(pancake.graphics.STROKE);
+pancake.graphics.mode = pancake.graphics.STROKE;
 
 // Draw triangle with green color
 pancake.graphics.color(pancake.graphics.RGB(0, 255, 0));
