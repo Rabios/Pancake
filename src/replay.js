@@ -57,7 +57,7 @@ p.re.play = function(i) {
             }
             
             if (!v.paused) {
-                if (v.time == v.duration) {
+                if (v.time === v.duration) {
                     if (v.reversed) {
                         if (!(v.current-- <= v.start)) v.current--;
                     } else {

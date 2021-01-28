@@ -1,7 +1,8 @@
 p.ga = {};
 
 p.ga.title = function(t) {
-    d.title = t;
+    if (w.Windows) w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView().title = t;
+    else d.title = t;
 };
 
 p.ga.restart = function() {

@@ -22,7 +22,7 @@ p.gf.draw = function(g, x, y, w, h) {
         p.g.image(q, x, y, w, h);
         if (!v.paused) {
             v.time++;
-            if (v.time == v.duration) {
+            if (v.time === v.duration) {
                 v.time = 0;
                 v.frame++;
             }

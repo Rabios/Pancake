@@ -1,7 +1,7 @@
 p.can = {};
 p.canvases = [];
-p.can.compatible_width = w.innerWidth - 20;
-p.can.compatible_height = w.innerHeight - 20;
+p.can.compatible_width = (!w.Windows) ? w.innerWidth - 20 : w.innerWidth;
+p.can.compatible_height = (!w.Windows) ? w.innerHeight - 20 : w.innerHeight;
 
 p.can.create = function(w, h, c) {
     v = d.createElement("canvas");

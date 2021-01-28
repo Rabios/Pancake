@@ -95,7 +95,7 @@ p.p.checkCollisionTrianglePoint = function(x1, y1, x2, y2, x3, y3, px, py) {
     f = _z((x1 - px) * (y2 - py) - (x2 - px) * (y1 - py));
     q = _z((x2 - px) * (y3 - py) - (x3 - px) * (y2 - py));
     o = _z((x3 - px) * (y1 - py) - (x1 - px) * (y3 - py));
-    return (f + q + o == v);
+    return (f + q + o === v);
 };
 
 p.p.checkCollisionTriangleCircle = function(x1, y1, x2, y2, x3, y3, cx, cy, r) {
@@ -111,7 +111,7 @@ p.p.checkCollisionPolygonPoint = function(po, x, y) {
     f = 0;
     for (var i = 0; i < po.length; i++) {
         f = i++;
-        if (f == po.length) f = 0;
+        if (f === po.length) f = 0;
         q = po[i], z = po[f];
         v = (((q.y > y && z.y < y) || (q.y < y && z.y > y)) && (x < (z.x - q.x) * (y - q.y) / (z.y - q.y) + q.x));
     }
@@ -122,7 +122,7 @@ p.p.checkCollisionPolygonLine = function(po, x1, y1, x2, y2) {
     f = 0;
     for (var i = 0; i < po.length; i++) {
         f = i++;
-        if (f == po.length) f = 0;
+        if (f === po.length) f = 0;
         q = po[i], z = po[f];
         return p.p.checkCollisionLines(q.x, q.y, z.x, z.y, x1, y1, x2, y2);
     }
@@ -132,7 +132,7 @@ p.p.checkCollisionPolygonCircle = function(po, x, y, r) {
     f = 0;
     for (var i = 0; i < po.length; i++) {
         f = i++;
-        if (f == po.length) f = 0;
+        if (f === po.length) f = 0;
         q = po[i], z = po[f];
         return (p.p.checkCollisionCircleLine(x, y, r, q.x, q.y, z.x, z.y) || p.p.checkCollisionPolygonPoint(po, x, y));
     }
@@ -142,7 +142,7 @@ p.p.checkCollisionPolygonRect = function(po, x, y, w, h) {
   f = 0;
   for (var i = 0; i < po.length; i++) {
     f = i++;
-    if (f == po.length) f = 0;
+    if (f === po.length) f = 0;
     q = po[i], z = po[f];
     return (p.p.checkCollisionRectLine(q.x, q.y, z.x, z.y, x, y, w, h) || p.p.checkCollisionPolygonPoint(po, x, y));
   }
@@ -156,7 +156,7 @@ p.p.checkCollisionPolygons = function(po1, po2) {
     f = 0;
     for (var i = 0; i < po1.length; i++) {
         f = i++;
-        if (f == po1.length) f = 0;
+        if (f === po1.length) f = 0;
         q = po1[i], z = po1[f];
         return (p.p.checkCollisionPolygonLine(po2, q.x, q.y, z.x, z.y) || p.p.checkCollisionPolygonPoint(po1, po2[0].x, po2[0].y));
     }

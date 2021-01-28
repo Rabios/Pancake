@@ -14,7 +14,7 @@ p.t.interval = function(f, ms) {
 p.t.dt = function() {
     p.t.t2 = da();
     p.t.rdt = p.t.t2 - p.t.t1;
-	p.t.t1 = p.t.t2;
+    p.t.t1 = p.t.t2;
     return p.t.rdt;
 };
 

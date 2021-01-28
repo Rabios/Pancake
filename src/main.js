@@ -2,7 +2,7 @@
 // https://github.com/Rabios/Pancake
 // Copyright (c) 2020 - 2021 [Rabia Alhaffar], Licensed under MIT License.
 var p = {};
-p.version = "v0.0.13";
+p.version = "v0.0.14";
 
 var w = window;
 var c = w.console;

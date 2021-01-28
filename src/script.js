@@ -10,6 +10,7 @@ p.s.loadSource = function(s) {
     p.s.create({
         src: s,
         type: "text/javascript",
+        language: "javascript",
         defer: !0
     });
 };

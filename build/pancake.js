@@ -2,7 +2,7 @@
 // https://github.com/Rabios/Pancake
 // Copyright (c) 2020 - 2021 [Rabia Alhaffar], Licensed under MIT License.
 var p = {};
-p.version = "v0.0.13";
+p.version = "v0.0.14";
 
 var w = window;
 var c = w.console;
@@ -73,9 +73,9 @@ p.a.reset = function(a) {
 p.b = {};
 p.b.s = {};
 
-var _ = d.createElement("audio");
-var __ = d.createElement("video");
-function _a(s) { return _.canPlayType(s) != ""; }
+var _audio = d.createElement("audio");
+var _video = d.createElement("video");
+function _a(s) { return _audio.canPlayType(s) != ""; }
 
 p.b.s.WEBGL = function() {
     v = d.createElement("canvas");
@@ -88,7 +88,8 @@ p.b.s.CANVAS = function() {
 };
 
 p.b.s.GAMEPAD = function() {
-    return (n.getGamepads || n.webkitGetGamepads || n.webkitGamepads);
+    if (w.Windows) return (w.Windows.Gaming.Input.Gamepad);
+    else return (n.getGamepads || n.webkitGetGamepads || n.webkitGamepads);
 };
 
 p.b.s.JAVA = function() {
@@ -128,11 +129,11 @@ p.b.s.WAV = function() {
 };
 
 p.b.s.MP4 = function() {
-    return __.canPlayType("video/mp4") != "";
+    return _video.canPlayType("video/mp4") != "";
 };
 
 p.b.s.WEBM = function() {
-    return __.canPlayType("video/webm") != "";
+    return _video.canPlayType("video/webm") != "";
 };
 
 p.b.supports = function(s) {
@@ -143,7 +144,9 @@ p.b.is = function(s) {
     return (ua.match(s) != u);
 };
 
-p.b.open = function(url) { w.open(url); }
+p.b.open = function(url) {
+    w.open(url);
+};
 
 f = p.b.is;
 p.b.CHROME = f("Chrome");
@@ -159,8 +162,8 @@ p.b.SEAMONKEY = f("SeaMonkey");
 
 p.can = {};
 p.canvases = [];
-p.can.compatible_width = w.innerWidth - 20;
-p.can.compatible_height = w.innerHeight - 20;
+p.can.compatible_width = (!w.Windows) ? w.innerWidth - 20 : w.innerWidth;
+p.can.compatible_height = (!w.Windows) ? w.innerHeight - 20 : w.innerHeight;
 
 p.can.create = function(w, h, c) {
     v = d.createElement("canvas");
@@ -209,15 +212,15 @@ p.con.create = function(c, co) {
     v = p.g.backend;
     f = p.canvases[c];
     q = { antialias: !0, preserveDrawingBuffer: !0 };
-    if (v == "CanvasRenderingContext2D") p.contexts[co] = f.getContext("2d");
-    if (v == "WebGLRenderingContext") p.contexts[co] = f.getContext("webgl", q) || f.getContext("experimental-webgl", q);
+    if (v === "CanvasRenderingContext2D") p.contexts[co] = f.getContext("2d");
+    if (v === "WebGLRenderingContext") p.contexts[co] = f.getContext("webgl", q) || f.getContext("experimental-webgl", q);
 };
 
 p.con.use = function(c, co) {
     v = p.g.backend;
     q = { antialias: !0, preserveDrawingBuffer: !0 };
-    if (v == "CanvasRenderingContext2D") p.contexts[co] = c.getContext("2d");
-    if (v == "WebGLRenderingContext") p.contexts[co] = c.getContext("webgl", q) || c.getContext("experimental-webgl", q);
+    if (v === "CanvasRenderingContext2D") p.contexts[co] = c.getContext("2d");
+    if (v === "WebGLRenderingContext") p.contexts[co] = c.getContext("webgl", q) || c.getContext("experimental-webgl", q);
     p.g.useContext(co);
     p.can.set(c, co);
 };
@@ -255,7 +258,8 @@ p.de.geoInfo = function() {
 p.ga = {};
 
 p.ga.title = function(t) {
-    d.title = t;
+    if (w.Windows) w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView().title = t;
+    else d.title = t;
 };
 
 p.ga.restart = function() {
@@ -296,52 +300,60 @@ p.i.swipe_start_y = 0;
 p.i.swipe_finish_x = 0;
 p.i.swipe_finish_y = 0;
 p.i.swipe_finish_time = 0;
+p.i.swipe_finish_time_limit = 1000;
+p.i.swipe_finish_x_limit = { from: 100, to: 300 };
+p.i.swipe_finish_y_limit = { from: 300, to: 300 };
+p.i.gamepad_threshold = 0.1;
+p.i.accelerometer_frequency = 60;
 p.i.swipe_direction = "";
 p.i.accelerometer = u;
 p.i.touches = [];
-var add = w.addEventListener;
 
 if (w.Accelerometer) {
-    p.i.accelerometer = new Accelerometer({ frequency: 60 });
-    p.i.accelerometer.addEventListener("reading", function(acl) {
+    p.i.accelerometer = new Accelerometer({ frequency: p.i.accelerometer_frequency });
+    p.i.accelerometer.onreading = function(acl) {
         p.i.accel_x = acl.x;
         p.i.accel_y = acl.y;
         p.i.accel_z = acl.z;
-    });
+    };
     p.i.accelerometer.start();
 }
 
-add("mousedown", function(e) {
+w.onmousedown = w.onmspointerdown = w.onpointerdown = function(e) {
     p.i.swipe_start_x = ex(e);
     p.i.swipe_start_y = ey(e);
     p.i.swipe_start_time = da();
-});
+    p.i.latest_mouse_button_down = e.button;
+    p.i.click = !1;
+};
 
-add("mouseup", function(e) {
+w.onmouseup = w.onmspointerenter = w.onpointerenter = function(e) {
     p.i.mouse_x = ex(e);
     p.i.mouse_y = ey(e);
     p.i.swipe_finish_x = p.i.mouse_x - p.i.swipe_start_x;
     p.i.swipe_finish_y = p.i.mouse_y - p.i.swipe_start_y;
     p.i.swipe_finish_time = da() - p.i.swipe_start_time;
-    if (p.i.swipe_finish_time <= 1000) {
+    if (p.i.swipe_finish_time <= p.i.swipe_finish_time_limit) {
         f = m.abs;
-        if (f(p.i.swipe_finish_x) >= 100 && f(p.i.swipe_finish_y) <= 300) {
+        if (f(p.i.swipe_finish_x) >= p.i.swipe_finish_x_limit.from && f(p.i.swipe_finish_y) <= p.i.swipe_finish_y_limit.to) {
             if (p.i.swipe_finish_x < 0) p.i.swipe_direction = "LEFT";
             else p.i.swipe_direction = "RIGHT";
         }
-        else if (f(p.i.swipe_finish_y) >= 100 && f(p.i.swipe_finish_x) <= 300) {
+        else if (f(p.i.swipe_finish_y) >= p.i.swipe_finish_y_limit.from && f(p.i.swipe_finish_x) <= p.i.swipe_finish_x_limit.to) {
             if (p.i.swipe_finish_y < 0) p.i.swipe_direction = "UP";
             else p.i.swipe_direction = "DOWN";
         }
     }
-});
+    p.i.latest_mouse_button_up = e.button;
+    p.i.click = !1;
+};
 
-add("mousemove",function(e) {
+w.onmousemove = w.onmspointermove = w.onpointermove = function(e) {
     p.i.mouse_x = ex(e);
     p.i.mouse_y = ey(e);
-});
+};
 
-add("touchstart", function(e) {
+w.ontouchstart = function(e) {
     q = e.changedTouches;
     for (var i = 0; i < q.length; i++) {
         p.i.touches[i] = {
@@ -360,51 +372,9 @@ add("touchstart", function(e) {
     p.i.touch_y = v.y;
     p.i.tap = !0;
     e.preventDefault();
-}, !1);
+};
 
-add("touchend", function(e) {
-    q = e.changedTouches;
-    for (var i = 0; i < q.length; i++) {
-        t = p.i.touches[i];
-        t.x = ex(q[i]);
-        t.y = ey(q[i]);
-        t.swipe_finish_x = q[i].pageX - t.swipe_start_x;
-        t.swipe_finish_y = q[i].pageY - t.swipe_start_y;
-        t.swipe_finish_time = da() - t.swipe_start_time;
-        t.tap = !0;
-        t.touchdown = !1;
-        if (t.swipe_finish_time <= 1000) {
-            f = m.abs;
-            if (f(t.swipe_finish_x) >= 100 && f(t.swipe_finish_y) <= 300) {
-                if (t.swipe_finish_x < 0) t.swipe_direction = "LEFT";
-                else t.swipe_direction = "RIGHT";
-            }
-            else if (f(t.swipe_finish_y) >= 100 && f(t.swipe_finish_x) <= 300) {
-                if (t.swipe_finish_y < 0) t.swipe_direction = "UP";
-                else t.swipe_direction = "DOWN";
-            }
-        }
-    }
-    v = p.i.touches[0];
-    p.i.touch_x = v.x;
-    p.i.touch_y = v.y;
-    p.i.tap = !0;
-    p.i.touchdown = !1;
-    e.preventDefault();
-}, !1);
-
-add("touchcancel", function(e) {
-    for (var i = 0; i < q.length; i++) {
-        t = p.i.touches[i];
-        t.tap = !1;
-        t.touchdown = !1;
-    }
-    p.i.tap = !1;
-    p.i.touchdown = !1;
-    e.preventDefault();
-}, !1);
-
-add("touchmove", function(e) {
+w.ontouchmove = function(e) {
     q = e.changedTouches;
     for (var i = 0; i < q.length; i++) {
         t = p.i.touches[i];
@@ -417,31 +387,63 @@ add("touchmove", function(e) {
     p.i.touch_y = v.Y;
     p.i.touchdown = !0;
     e.preventDefault();
-}, !1);
+};
 
-add("click", function() {
+w.ontouchend = function(e) {
+    q = e.changedTouches;
+    for (var i = 0; i < q.length; i++) {
+        t = p.i.touches[i];
+        t.x = ex(q[i]);
+        t.y = ey(q[i]);
+        t.swipe_finish_x = q[i].pageX - t.swipe_start_x;
+        t.swipe_finish_y = q[i].pageY - t.swipe_start_y;
+        t.swipe_finish_time = da() - t.swipe_start_time;
+        t.tap = !0;
+        t.touchdown = !1;
+        if (t.swipe_finish_time <= p.i.swipe_finish_time_limit) {
+            f = m.abs;
+            if (f(t.swipe_finish_x) >= p.i.swipe_finish_x_limit.from && f(t.swipe_finish_y) <= p.i.swipe_finish_y_limit.to) {
+                if (t.swipe_finish_x < 0) t.swipe_direction = "LEFT";
+                else t.swipe_direction = "RIGHT";
+            }
+            else if (f(t.swipe_finish_y) >= p.i.swipe_finish_y_limit.from && f(t.swipe_finish_x) <= p.i.swipe_finish_x_limit.to) {
+                if (t.swipe_finish_y < 0) t.swipe_direction = "UP";
+                else t.swipe_direction = "DOWN";
+            }
+        }
+    }
+    v = p.i.touches[0];
+    p.i.touch_x = v.x;
+    p.i.touch_y = v.y;
+    p.i.tap = !0;
+    p.i.touchdown = !1;
+    e.preventDefault();
+};
+
+w.ontouchcancel = function(e) {
+    for (var i = 0; i < q.length; i++) {
+        t = p.i.touches[i];
+        t.tap = !1;
+        t.touchdown = !1;
+    }
+    p.i.tap = !1;
+    p.i.touchdown = !1;
+    e.preventDefault();
+};
+
+w.onclick = function() {
     p.i.click = !0;
-});
+};
 
-add("mousedown", function(e) {
-    p.i.latest_mouse_button_down = e.button;
-    p.i.click = !1;
-});
-
-add("mouseup", function(e) {
-    p.i.latest_mouse_button_up = e.button;
-    p.i.click = !1;
-});
-
-add("keydown", function(e) {
+w.onkeydown = function(e) {
     p.i.latest_key_down = e.which || e.keyCode;
-});
+};
 
-add("keyup", function(e) {
+w.onkeyup = function(e) {
     p.i.latest_key_up = e.which || e.keyCode;
-});
+};
 
-add("wheel", function(e) {
+w.onwheel = function(e) {
     p.i.wheel_x = e.deltaX;
     p.i.wheel_y = e.deltaY;
     p.i.wheel_z = e.deltaZ;
@@ -452,7 +454,7 @@ add("wheel", function(e) {
     } else if (p.i.wheel_x < 0) {
         p.i.wheel_left = !0;
         p.i.wheel_right = !1;
-    } else if (p.i.wheel_x == 0) p.i.wheel_left = p.i.wheel_right = !1;
+    } else if (p.i.wheel_x === 0) p.i.wheel_left = p.i.wheel_right = !1;
     
     if (p.i.wheel_y > 0) {
         p.i.wheel_up = !1;
@@ -460,29 +462,29 @@ add("wheel", function(e) {
     } else if (p.i.wheel_y < 0) {
         p.i.wheel_up = !0;
         p.i.wheel_down = !1;
-    } else if (p.i.wheel_y == 0) p.i.wheel_up = p.i.wheel_down = !1;
-});
+    } else if (p.i.wheel_y === 0) p.i.wheel_up = p.i.wheel_down = !1;
+};
 
 p.i.mousedown = function(b) {
-    return p.i.latest_mouse_button_down == b;
+    return p.i.latest_mouse_button_down === b;
 };
 
 p.i.mouseup = function(b) {
-    return p.i.latest_mouse_button_up == b;
+    return p.i.latest_mouse_button_up === b;
 };
 
 p.i.swipe = function(d, f) {
     q = p.i.touches[f || 0];
-    if (q) return (q.swipe_direction == d);
-    else return (p.i.swipe_direction == d);
+    if (q) return (q.swipe_direction === d);
+    else return (p.i.swipe_direction === d);
 };
 
 p.i.keydown = function(k) {
-    return p.i.latest_key_down == k;
+    return p.i.latest_key_down === k;
 };
 
 p.i.keyup = function(k) {
-    return p.i.latest_key_up == k;
+    return p.i.latest_key_up === k;
 };
 
 p.i.cursorState = function(s, i) {
@@ -490,7 +492,7 @@ p.i.cursorState = function(s, i) {
     v = d.getElementsByTagName("html")[0];
     v.style.height = "100%";
     p.canvases[i || 0].style.cursor = s;
-    if (p.g.backend == "WebGLRenderingContext" && p.g.ctx2d_enabled) p.g.ctx2d.canvas.style.cursor = s;
+    if (p.g.backend === "WebGLRenderingContext" && p.g.ctx2d_enabled) p.g.ctx2d.canvas.style.cursor = s;
     b.style.height = "auto";
     v.style.height = "auto";
 };
@@ -518,68 +520,115 @@ p.i.unlockPointer = function() {
 };
 
 if (p.b.s.GAMEPAD()) {
-    n.getGamepads = n.getGamepads || n.webkitGetGamepads || n.webkitGamepads;
+    if (!w.Windows) n.getGamepads = n.getGamepads || n.webkitGetGamepads || n.webkitGamepads;
     p.i.gamepad_move_horizontal_direction = "";
     p.i.gamepad_move_vertical_direction = "";
     p.i.gamepad_camera_horizontal_direction = "";
     p.i.gamepad_camera_vertical_direction = "";
-    p.i.GAMEPAD_ANALOG_UP = -0.1;
-    p.i.GAMEPAD_ANALOG_DOWN = 0.1;
-    p.i.GAMEPAD_ANALOG_LEFT = 0.1;
-    p.i.GAMEPAD_ANALOG_RIGHT = -0.1;
+    p.i.GAMEPAD_ANALOG_UP = -p.i.gamepad_threshold;
+    p.i.GAMEPAD_ANALOG_DOWN = p.i.gamepad_threshold;
+    p.i.GAMEPAD_ANALOG_LEFT = p.i.gamepad_threshold;
+    p.i.GAMEPAD_ANALOG_RIGHT = -p.i.gamepad_threshold;
     p.i.GAMEPAD_MOVE_ANALOG = 1;
     p.i.GAMEPAD_CAMERA_ANALOG = 2;
 
+    if (w.Windows) {
+        p.i.GAMEPAD_ANALOG_UP = -p.i.GAMEPAD_ANALOG_UP;
+        p.i.GAMEPAD_ANALOG_DOWN = -p.i.GAMEPAD_ANALOG_DOWN;
+    }
+
     p.i.gamepadConnected = function(i) {
-        return !(n.getGamepads()[i] == u);
+        if (w.Windows) return (w.Windows.Gaming.Input.Gamepad.gamepads[i]);
+        else return (n.getGamepads()[i]);
     };
-    
+
     p.i.gamepadID = function(i) {
-        v = n.getGamepads()[i];
-        if (!(v == u)) return v.id;
+        if (!w.Windows) {
+            v = n.getGamepads()[i];
+            if (v) return v.id;
+        } else return "XInput STANDARD GAMEPAD";
     };
-    
+
     p.i.gamepadButtonPressed = function(i, b) {
-        v = n.getGamepads()[i];
-        if (!(v == u)) return v.buttons[b].pressed;
+        if (!w.Windows) {
+            v = n.getGamepads()[i];
+            if (v) return v.buttons[b].pressed;
+        } else {
+            v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
+            if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
+            else return (v.buttons === w.Windows.Gaming.Input.GamepadButtons[b]);
+        }
     };
-    
+
     p.i.gamepadButtonTouched = function(i, b) {
-        v = n.getGamepads()[i];
-        if (!(v == u)) return v.buttons[b].touched;
+        if (!w.Windows) {
+            v = n.getGamepads()[i];
+            if (v) return v.buttons[b].touched;
+        } else {
+            v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
+            if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
+            else return (v.buttons === w.Windows.Gaming.Input.GamepadButtons[b]);
+        }
     };
 
     p.i.gamepadMovement = function(i, a, d) {
-        v = n.getGamepads()[i];
-        if (!(v == u)) {
-            if (a == p.i.GAMEPAD_MOVE_ANALOG) {
-                if (v.axes[1] <= d) p.i.gamepad_move_vertical_direction = "UP";
-                if (v.axes[1] >= d) p.i.gamepad_move_vertical_direction = "DOWN";
-                if (v.axes[0] <= d) p.i.gamepad_move_horizontal_direction = "LEFT";
-                if (v.axes[0] >= d) p.i.gamepad_move_horizontal_direction = "RIGHT";
+        if (!w.Windows) {
+            v = n.getGamepads()[i];
+            if (v) {
+                if (a === p.i.GAMEPAD_MOVE_ANALOG) {
+                    if (v.axes[1] <= d) p.i.gamepad_move_vertical_direction = "UP";
+                    if (v.axes[1] >= d) p.i.gamepad_move_vertical_direction = "DOWN";
+                    if (v.axes[0] <= d) p.i.gamepad_move_horizontal_direction = "LEFT";
+                    if (v.axes[0] >= d) p.i.gamepad_move_horizontal_direction = "RIGHT";
+                }
+
+                if (a === p.i.GAMEPAD_CAMERA_ANALOG) {
+                    if (v.axes[3] <= d) p.i.gamepad_camera_vertical_direction = "UP";
+                    if (v.axes[3] >= d) p.i.gamepad_camera_vertical_direction = "DOWN";
+                    if (v.axes[2] <= d) p.i.gamepad_camera_horizontal_direction = "LEFT";
+                    if (v.axes[2] >= d) p.i.gamepad_camera_horizontal_direction = "RIGHT";
+                }
             }
-            
-            if (a == p.i.GAMEPAD_CAMERA_ANALOG) {
-                if (v.axes[3] <= d) p.i.gamepad_camera_vertical_direction = "UP";
-                if (v.axes[3] >= d) p.i.gamepad_camera_vertical_direction = "DOWN";
-                if (v.axes[2] <= d) p.i.gamepad_camera_horizontal_direction = "LEFT";
-                if (v.axes[2] >= d) p.i.gamepad_camera_horizontal_direction = "RIGHT";
+        } else {
+            v = w.Windows.Gaming.Input.Gamepad.gamepads[i];
+            if (v) {
+                f = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
+                if (a === p.i.GAMEPAD_MOVE_ANALOG) {
+                    if (f.leftThumbstickY >= d) p.i.gamepad_move_vertical_direction = "UP";
+                    if (f.leftThumbstickY <= d) p.i.gamepad_move_vertical_direction = "DOWN";
+                    if (f.leftThumbstickX <= d) p.i.gamepad_move_horizontal_direction = "LEFT";
+                    if (f.leftThumbstickX >= d) p.i.gamepad_move_horizontal_direction = "RIGHT";
+                }
+
+                if (a === p.i.GAMEPAD_CAMERA_ANALOG) {
+                    if (f.rightThumbstickY >= d) p.i.gamepad_camera_vertical_direction = "UP";
+                    if (f.rightThumbstickY <= d) p.i.gamepad_camera_vertical_direction = "DOWN";
+                    if (f.rightThumbstickX <= d) p.i.gamepad_camera_horizontal_direction = "LEFT";
+                    if (f.rightThumbstickX >= d) p.i.gamepad_camera_horizontal_direction = "RIGHT";
+                }
             }
         }
     };
 
     p.i.gamepadAnalogMoved = function(i, a, d) {
-        if (d == "UP") q = p.i.GAMEPAD_ANALOG_UP;
-        if (d == "DOWN") q = p.i.GAMEPAD_ANALOG_DOWN;
-        if (d == "LEFT") q = p.i.GAMEPAD_ANALOG_LEFT;
-        if (d == "RIGHT") q = p.i.GAMEPAD_ANALOG_RIGHT;
+        if (d === "UP") q = p.i.GAMEPAD_ANALOG_UP;
+        if (d === "DOWN") q = p.i.GAMEPAD_ANALOG_DOWN;
+        if (d === "LEFT") q = p.i.GAMEPAD_ANALOG_LEFT;
+        if (d === "RIGHT") q = p.i.GAMEPAD_ANALOG_RIGHT;
         p.i.gamepadMovement(i, a, q);
-        if (a == p.i.GAMEPAD_MOVE_ANALOG) return (p.i.gamepad_move_horizontal_direction == d || p.i.gamepad_move_vertical_direction == d);
-        if (a == p.i.GAMEPAD_CAMERA_ANALOG) return (p.i.gamepad_camera_horizontal_direction == d || p.i.gamepad_camera_vertical_direction == d);
+        if (a === p.i.GAMEPAD_MOVE_ANALOG) return (p.i.gamepad_move_horizontal_direction === d || p.i.gamepad_move_vertical_direction === d);
+        if (a === p.i.GAMEPAD_CAMERA_ANALOG) return (p.i.gamepad_camera_horizontal_direction === d || p.i.gamepad_camera_vertical_direction === d);
     };
+} else {
+    p.i.gamepadConnected = function(i) { return !1 };
+    p.i.gamepadID = function(i) { return u };
+    p.i.gamepadButtonPressed = function(i, b) { return !1; };
+    p.i.gamepadButtonTouched = function(i, b) { return !1; };
+    p.i.gamepadMovement = function(i, a, d) { return u };
+    p.i.gamepadAnalogMoved = function(i, a, d) { return !1; };
 }
 
-p.i.preventLoop = function() {
+p.i.preventLoop = function () {
     p.i.latest_key_down = -1;
     p.i.latest_key_up = -1;
     p.i.latest_mouse_button_down = -1;
@@ -595,19 +644,17 @@ p.i.preventLoop = function() {
     if (p.i.touches.length > 0) {
         for (var i = 0; i < p.i.touches.length; i++) p.i.touches[i].swipe_direction = "";
     }
-    if (p.b.s.GAMEPAD()) {
-        p.i.gamepad_move_horizontal_direction = "";
-        p.i.gamepad_move_vertical_direction = "";
-        p.i.gamepad_camera_horizontal_direction = "";
-        p.i.gamepad_camera_vertical_direction = "";
-    }
+    p.i.gamepad_move_horizontal_direction = "";
+    p.i.gamepad_move_vertical_direction = "";
+    p.i.gamepad_camera_horizontal_direction = "";
+    p.i.gamepad_camera_vertical_direction = "";
 };
 
 p.i.key = {
     A: 65, B: 66, C: 67, D: 68, E: 69, F: 70, G: 71, H: 72, I: 73, J: 74, K: 75, L: 76, M: 77,
     N: 78, O: 79, P: 80, Q: 81, R: 82, S: 83, T: 84, U: 85, V: 86, W: 87, X: 88, Y: 89, Z: 90,
     ZERO: 48, ONE: 49, TWO: 50, THREE: 51, FOUR: 52, FIVE: 53, SIX: 54, SEVEN: 55, EIGHT: 56,
-    NINE: 57, UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, TAB: 9, SHIFT: 16, CONTROL: 17, 
+    NINE: 57, UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, TAB: 9, SHIFT: 16, CONTROL: 17,
     ALT: 18, BACKSPACE: 8, ENTER: 13, NUMLOCK: 144, OS: 91, UNIDENTIFIED: 0, HOME: 36, PGUP: 33,
     PGDN: 34, CLEAR: 12, DELETE: 46, ESCAPE: 27, INSERT: 45
 };
@@ -621,10 +668,28 @@ p.i.tvkey = {
 
 p.i.button = {
     LEFT_MOUSE_BUTTON: 0, RIGHT_MOUSE_BUTTON: 2, MIDDLE_MOUSE_BUTTON: 1, A: 0, B: 1, XBOX_X: 2,
-    Y: 3, LB: 4, RB: 5, LT: 6, RT: 7, BACK: 8, START: 9, LEFT_ANALOG_STICK: 10, RIGHT_ANALOG_STICK: 11,
-    UP: 12, DOWN: 13, LEFT: 14, RIGHT: 15, PLAYSTATION_X: 0, O: 1, SQUARE: 2, TRIANGLE: 3, L1: 4, R1: 5, L2: 6, R2: 7, 
-    SELECT: 8
+    Y: 3, LB: 4, RB: 5, LT: 6, RT: 7, SELECT: 8, BACK: 8, VIEW: 8, START: 9, MENU: 9, LEFT_ANALOG_STICK: 10, RIGHT_ANALOG_STICK: 11,
+    UP: 12, DOWN: 13, LEFT: 14, RIGHT: 15, PLAYSTATION_X: 0, O: 1, SQUARE: 2, TRIANGLE: 3, L1: 4, R1: 5, L2: 6, R2: 7
 };
+
+if (w.Windows) {
+    p.i.button.A = "a";
+    p.i.button.B = "b";
+    p.i.button.XBOX_X = "x";
+    p.i.button.Y = "y";
+    p.i.button.UP = "dpadUp";
+    p.i.button.DOWN = "dpadDown";
+    p.i.button.LEFT = "dpadLeft";
+    p.i.button.RIGHT = "dpadRight";
+    p.i.button.LB = "leftShoulder";
+    p.i.button.RB = "rightShoulder";
+    p.i.button.LT = "leftTrigger";
+    p.i.button.RT = "rightTrigger";
+    p.i.button.BACK = p.i.button.SELECT = p.i.button.VIEW = "view";
+    p.i.button.START = p.i.button.MENU = "menu";
+    p.i.button.LEFT_ANALOG_STICK = "leftThumbstick";
+    p.i.button.RIGHT_ANALOG_STICK = "rightThumbstick";
+}
 
 p.o = {};
 p.o.iOS = f(/iPhone|iPad|iPod|Apple-iPhone/i);
@@ -714,7 +779,7 @@ p.re.play = function(i) {
             }
             
             if (!v.paused) {
-                if (v.time == v.duration) {
+                if (v.time === v.duration) {
                     if (v.reversed) {
                         if (!(v.current-- <= v.start)) v.current--;
                     } else {
@@ -740,6 +805,7 @@ p.re.resume = function(i) {
 };
 
 p.x = {};
+
 p.x.exec = function(e, url, s, t) {
     q = x();
     q.open(e, url, !1);
@@ -804,17 +870,43 @@ p.g.fit = function() {
     v = p.g.ca;
     v.style.position = "absolute";
     v.style.left = v.style.top = 0;
-    v.width = p.can.compatible_width + 20;
-    v.height = p.can.compatible_height + 20;
+    v.width = (!w.Windows) ? p.can.compatible_width + 20 : p.can.compatible_width;
+    v.height = (!w.Windows) ? p.can.compatible_height + 20 : p.can.compatible_height;
     p.g.fits = !0;
 };
 
 p.g.fullscreen = function() {
-    return (d.fullscreen || d.webkitIsFullScreen || d.mozFullScreen);
+    if (w.Windows) {
+        f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+        return (f.isFullScreen || f.isFullScreenMode);
+    }
+    else return (d.fullscreen || d.webkitIsFullScreen || d.mozFullScreen || d.fullscreenElement !== u);
 };
     
 p.g.toggleFullscreen = function() {
     v = p.g.ca;
+    if (w.nw) {
+        f = w.nw.Window.get();
+        if (f) {
+            f.toggleFullscreen();
+            f.enterFullscreen();
+        }
+    }
+    if (w.require) {
+        if (w.require("electron")) {
+            f = w.require("electron").getCurrentWindow();
+            f.setFullScreen(!0);
+            f.setMenuBarVisibility(!1);
+        }
+    }
+    if (w.Windows) {
+        f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+        if (!f.isFullScreen || !f.isFullScreenMode) {
+            if (f.tryEnterFullScreenMode()) {
+                f.fullScreenSystemOverlayMode = w.Windows.UI.ViewManagement.ApplicationViewWindowingMode.fullScreen;
+            }
+        }
+    }
     if (v.requestFullscreen) v.requestFullscreen();
     if (v.mozRequestFullScreen) v.mozRequestFullScreen();
     if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
@@ -824,6 +916,23 @@ p.g.toggleFullscreen = function() {
 
 p.g.exitFullscreen = function() {
     v = p.g.ca;
+    if (w.nw) {
+        if (w.nw.Window.get()) w.nw.Window.get().leaveFullscreen();
+    }
+    if (w.require) {
+        if (w.require("electron")) {
+            f = w.require("electron").getCurrentWindow();
+            f.setFullScreen(!1);
+            f.setMenuBarVisibility(!0);
+        }
+    }
+    if (w.Windows) {
+        f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+        if (f.isFullScreen || f.isFullScreenMode) {
+            f.exitFullScreenMode();
+            f.fullScreenSystemOverlayMode = w.Windows.UI.ViewManagement.ApplicationViewWindowingMode.preferredLaunchViewSize;
+        }
+    }
     if (d.exitFullscreen) d.exitFullscreen();
     if (d.mozCancelFullScreen) d.mozCancelFullScreen();
     if (d.webkitExitFullscreen) d.webkitExitFullscreen();
@@ -903,9 +1012,9 @@ p.g.clear = function() {
 };
 
 p.g.render = function(v, f) {
-    if (v == p.g.FILL) f.fill();
-    if (v == p.g.STROKE) f.stroke();
-    if (v == p.g.BOTH) {
+    if (v === p.g.FILL) f.fill();
+    if (v === p.g.STROKE) f.stroke();
+    if (v === p.g.BOTH) {
         f.fill();
         f.stroke();
     }
@@ -914,9 +1023,9 @@ p.g.render = function(v, f) {
 p.g.text = function(t, x, y) {
     v = p.g.mode;
     f = p.g.c;
-    if (v == p.g.FILL) f.fillText(t, x, y);
-    if (v == p.g.STROKE) f.strokeText(t, x, y);
-    if (v == p.g.BOTH) {
+    if (v === p.g.FILL) f.fillText(t, x, y);
+    if (v === p.g.STROKE) f.strokeText(t, x, y);
+    if (v === p.g.BOTH) {
         f.fillText(t, x, y);
         f.strokeText(t, x, y);
     }
@@ -1154,14 +1263,14 @@ p.sf.draw = function(sf, txt, x, y, s, sp, c, op) {
     var f = sp;
     var o = p.g.tint != u ? p.g.tint : u;
     for (var i = 0; i < txt.length; i++) {
-        if (i == 0) sp = 0; else sp = f;
+        if (i === 0) sp = 0; else sp = f;
         var q = p.fonts[sf].chars[txt[i]];
-        if (p.g.backend == "WebGLRenderingContext") {
+        if (p.g.backend === "WebGLRenderingContext") {
             o[3] = op || o[3] || 1;
             po.c.tint = p.g.tint = c || p.g.tint;
             if (q) p.g.drawImage(p.fonts[sf].image, q.x, q.y, q.w, q.h, x + (i * (s + sp)), y, s, s);
         }
-        else if (p.g.backend == "CanvasRenderingContext2D") {
+        else if (p.g.backend === "CanvasRenderingContext2D") {
             var oo = d.createElement("canvas").getContext("2d");
             oo.canvas.width = p.fonts[sf].image.width;
             oo.canvas.height = p.fonts[sf].image.height;
@@ -1176,7 +1285,7 @@ p.sf.draw = function(sf, txt, x, y, s, sp, c, op) {
             if (q) p.g.drawImage(oo.canvas, q.x, q.y, q.w, q.h, x + (i * (s + sp)), y, s, s);
         }
     }
-    if (p.g.backend == "WebGLRenderingContext") po.c.tint = p.g.tint = o;
+    if (p.g.backend === "WebGLRenderingContext") po.c.tint = p.g.tint = o;
 };
 
 p.gf = {};
@@ -1203,7 +1312,7 @@ p.gf.draw = function(g, x, y, w, h) {
         p.g.image(q, x, y, w, h);
         if (!v.paused) {
             v.time++;
-            if (v.time == v.duration) {
+            if (v.time === v.duration) {
                 v.time = 0;
                 v.frame++;
             }
@@ -1242,7 +1351,7 @@ p.sp.draw = function(i, st, x, y, w, h) {
     if (q && (v.frame <= v.end - 1)) {
         p.g.drawImage(p.sprites[i].src, q.x, q.y, q.w, q.h, x, y, w, h);
         if (!v.paused) {
-            if (v.time == v.duration) {
+            if (v.time === v.duration) {
                 v.time = 0;
                 v.frame++;
             }
@@ -1370,7 +1479,7 @@ p.p.checkCollisionTrianglePoint = function(x1, y1, x2, y2, x3, y3, px, py) {
     f = _z((x1 - px) * (y2 - py) - (x2 - px) * (y1 - py));
     q = _z((x2 - px) * (y3 - py) - (x3 - px) * (y2 - py));
     o = _z((x3 - px) * (y1 - py) - (x1 - px) * (y3 - py));
-    return (f + q + o == v);
+    return (f + q + o === v);
 };
 
 p.p.checkCollisionTriangleCircle = function(x1, y1, x2, y2, x3, y3, cx, cy, r) {
@@ -1386,7 +1495,7 @@ p.p.checkCollisionPolygonPoint = function(po, x, y) {
     f = 0;
     for (var i = 0; i < po.length; i++) {
         f = i++;
-        if (f == po.length) f = 0;
+        if (f === po.length) f = 0;
         q = po[i], z = po[f];
         v = (((q.y > y && z.y < y) || (q.y < y && z.y > y)) && (x < (z.x - q.x) * (y - q.y) / (z.y - q.y) + q.x));
     }
@@ -1397,7 +1506,7 @@ p.p.checkCollisionPolygonLine = function(po, x1, y1, x2, y2) {
     f = 0;
     for (var i = 0; i < po.length; i++) {
         f = i++;
-        if (f == po.length) f = 0;
+        if (f === po.length) f = 0;
         q = po[i], z = po[f];
         return p.p.checkCollisionLines(q.x, q.y, z.x, z.y, x1, y1, x2, y2);
     }
@@ -1407,7 +1516,7 @@ p.p.checkCollisionPolygonCircle = function(po, x, y, r) {
     f = 0;
     for (var i = 0; i < po.length; i++) {
         f = i++;
-        if (f == po.length) f = 0;
+        if (f === po.length) f = 0;
         q = po[i], z = po[f];
         return (p.p.checkCollisionCircleLine(x, y, r, q.x, q.y, z.x, z.y) || p.p.checkCollisionPolygonPoint(po, x, y));
     }
@@ -1417,7 +1526,7 @@ p.p.checkCollisionPolygonRect = function(po, x, y, w, h) {
   f = 0;
   for (var i = 0; i < po.length; i++) {
     f = i++;
-    if (f == po.length) f = 0;
+    if (f === po.length) f = 0;
     q = po[i], z = po[f];
     return (p.p.checkCollisionRectLine(q.x, q.y, z.x, z.y, x, y, w, h) || p.p.checkCollisionPolygonPoint(po, x, y));
   }
@@ -1431,7 +1540,7 @@ p.p.checkCollisionPolygons = function(po1, po2) {
     f = 0;
     for (var i = 0; i < po1.length; i++) {
         f = i++;
-        if (f == po1.length) f = 0;
+        if (f === po1.length) f = 0;
         q = po1[i], z = po1[f];
         return (p.p.checkCollisionPolygonLine(po2, q.x, q.y, z.x, z.y) || p.p.checkCollisionPolygonPoint(po1, po2[0].x, po2[0].y));
     }
@@ -1479,6 +1588,7 @@ p.s.loadSource = function(s) {
     p.s.create({
         src: s,
         type: "text/javascript",
+        language: "javascript",
         defer: !0
     });
 };
@@ -1506,7 +1616,7 @@ p.sp.draw = function(i, st, x, y, w, h) {
     if (q && (v.frame <= v.end - 1)) {
         p.g.drawImage(p.sprites[i].src, q.x, q.y, q.w, q.h, x, y, w, h);
         if (!v.paused) {
-            if (v.time == v.duration) {
+            if (v.time === v.duration) {
                 v.time = 0;
                 v.frame++;
             }
@@ -1561,7 +1671,7 @@ p.t.interval = function(f, ms) {
 p.t.dt = function() {
     p.t.t2 = da();
     p.t.rdt = p.t.t2 - p.t.t1;
-	p.t.t1 = p.t.t2;
+    p.t.t1 = p.t.t2;
     return p.t.rdt;
 };
 

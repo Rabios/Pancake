@@ -2,9 +2,14 @@
 
 > NOTE: For each update, I recommend you to always take look at [API](https://github.com/Rabios/Pancake/blob/master/docs/api.md) for changes occur.
 
-### v0.0.13 (Update 13)
+### v0.0.14 (Update 14)
 
-> NOTE: This might be the last update!
+1. Added support and improvements for working with native stuff like NWJS, Electron, Phonegap, Cordova, WinJS, and UWP...
+2. As gamepad functions not supported by Internet Explorer, You'll get null/false instead of being not exist in Pancake (That's to prove error-safe lib)
+3. Done some improvements...
+4. Added input-customizing variables like `pancake.input.gamepad_threshold`, `pancake.input.swipe_finish_x_limit`, `pancake.input.swipe_finish_y_limit`, `pancake.input.swipe_finish_time_limit`, `pancake.input.accelerometer_frequency`, Enjoy modding some input sensitivity!
+
+### v0.0.13 (Update 13)
 
 1. Fixed WebGL renderer and rewrote with internal use of heavily modified version of [polygl.js](https://github.com/Rabios/polygl.js).
 2. Added plugins like `pancake.wasm` for WebAssembly, And `pancake.clipboard` for Clipboard API support, And more...

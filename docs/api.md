@@ -1,6 +1,6 @@
 # Pancake API
 
-This is the official API page of Pancake, I know it's weird to believe how i fit all this in over 40kb...
+This is the official API page of Pancake, I know it's weird to believe how i fit all this in very thin size!
 
 Pancake currently containts over 190 functions, Enjoy!
 
@@ -27,10 +27,10 @@ Pancake currently containts over 190 functions, Enjoy!
   - [`pancake.spritefont`](#pancakespritefont)
   - [`pancake.xhr`](#pancakexhr)
   - [Keyboard keys](#keyboard-keys)
-  - [TV Remote keys](#tv-remote-keys)
+    - [TV Remote keys](#tv-remote-keys)
   - [Gamepad and mouse buttons](#gamepad-and-mouse-buttons)
   - [Arrays](#arrays)
-  - [How to get content from index?](#how-to-get-content-from-index)
+      - [How to get content from index?](#how-to-get-content-from-index)
 
 ## `pancake.canvas`
 
@@ -161,8 +161,14 @@ pancake.input.gamepad_move_horizontal_direction               // Returns gamepad
 pancake.input.gamepad_move_vertical_direction                 // Returns gamepad vertical move analog direction
 pancake.input.gamepad_camera_horizontal_direction             // Returns gamepad horizontal camera analog direction
 pancake.input.gamepad_camera_vertical_direction               // Returns gamepad vertical camera analog direction
+pancake.input.gamepad_threshold                               // Gamepad analog strength...
+pancake.input.swipe_finish_x_limit                            // X swipe limit
+pancake.input.swipe_finish_y_limit                            // Y swipe limit
+pancake.input.swipe_finish_time_limit                         // Swipe duration limit
+pancake.input.accelerometer_frequency                         // Default accelerometer frequency (60 By the way)
 pancake.input.accelerometer                                   // Accelerometer used by Pancake for Accelerometer controls
 pancake.input.touches                                         // Array contains touches
+
 
 /*
 // The index 0 references to first finger ;)
@@ -430,10 +436,10 @@ pancake.spritefont.draw(spritefont_index, text, x, y, size, spacing, color, colo
 ## `pancake.xhr`
 
 ```js
+pancake.xhr.exec(request_type, url, content_to_send, content_type) // The function that all other XHR functions built on
 pancake.xhr.get(url, content_to_send)                        // Does "GET" request with url and with content to send (Default content is null)
 pancake.xhr.post(url, content_to_send, content_type)         // Does "POST" request with url and with content to send (Default content is null)
 pancake.xhr.head(url, content_to_send)                       // Does "HEAD" request with url and with content to send (Default content is null)
-pancake.xhr.abort(XMLHttpRequest)                            // Aborts a XMLHttpRequest
 ```
 
 ## Keyboard keys
@@ -571,6 +577,8 @@ pancake.input.button.R1
 pancake.input.button.L2
 pancake.input.button.R2
 pancake.input.button.SELECT
+pancake.input.button.MENU
+pancake.input.button.VIEW
 ```
 
 ## Arrays
@@ -614,5 +622,4 @@ pancake.audio.load("music.mp3", 0);                          // Loads audio file
 pancake.audio_files[0];                                      // Returns music.mp3
 pancake.audio.playFromIndex(0);                              // Plays pancake.audio_files[0]
 pancake.audio_files[0].loop = true;                          // Used DOM JavaScript
-
 ```

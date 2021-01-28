@@ -1,9 +1,9 @@
 p.b = {};
 p.b.s = {};
 
-var _ = d.createElement("audio");
-var __ = d.createElement("video");
-function _a(s) { return _.canPlayType(s) != ""; }
+var _audio = d.createElement("audio");
+var _video = d.createElement("video");
+function _a(s) { return _audio.canPlayType(s) != ""; }
 
 p.b.s.WEBGL = function() {
     v = d.createElement("canvas");
@@ -16,7 +16,8 @@ p.b.s.CANVAS = function() {
 };
 
 p.b.s.GAMEPAD = function() {
-    return (n.getGamepads || n.webkitGetGamepads || n.webkitGamepads);
+    if (w.Windows) return (w.Windows.Gaming.Input.Gamepad);
+    else return (n.getGamepads || n.webkitGetGamepads || n.webkitGamepads);
 };
 
 p.b.s.JAVA = function() {
@@ -56,11 +57,11 @@ p.b.s.WAV = function() {
 };
 
 p.b.s.MP4 = function() {
-    return __.canPlayType("video/mp4") != "";
+    return _video.canPlayType("video/mp4") != "";
 };
 
 p.b.s.WEBM = function() {
-    return __.canPlayType("video/webm") != "";
+    return _video.canPlayType("video/webm") != "";
 };
 
 p.b.supports = function(s) {
@@ -71,7 +72,9 @@ p.b.is = function(s) {
     return (ua.match(s) != u);
 };
 
-p.b.open = function(url) { w.open(url); }
+p.b.open = function(url) {
+    w.open(url);
+};
 
 f = p.b.is;
 p.b.CHROME = f("Chrome");

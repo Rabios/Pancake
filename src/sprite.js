@@ -21,7 +21,7 @@ p.sp.draw = function(i, st, x, y, w, h) {
     if (q && (v.frame <= v.end - 1)) {
         p.g.drawImage(p.sprites[i].src, q.x, q.y, q.w, q.h, x, y, w, h);
         if (!v.paused) {
-            if (v.time == v.duration) {
+            if (v.time === v.duration) {
                 v.time = 0;
                 v.frame++;
             }

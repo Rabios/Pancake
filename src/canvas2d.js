@@ -42,17 +42,47 @@ p.g.fit = function() {
     v = p.g.ca;
     v.style.position = "absolute";
     v.style.left = v.style.top = 0;
-    v.width = p.can.compatible_width + 20;
-    v.height = p.can.compatible_height + 20;
+    v.width = (!w.Windows) ? p.can.compatible_width + 20 : p.can.compatible_width;
+    v.height = (!w.Windows) ? p.can.compatible_height + 20 : p.can.compatible_height;
     p.g.fits = !0;
 };
 
 p.g.fullscreen = function() {
-    return (d.fullscreen || d.webkitIsFullScreen || d.mozFullScreen);
+    if (w.Windows) {
+        f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+        return (f.isFullScreen || f.isFullScreenMode);
+    }
+    else return (d.fullscreen || d.webkitIsFullScreen || d.mozFullScreen || d.fullscreenElement !== u);
 };
     
 p.g.toggleFullscreen = function() {
     v = p.g.ca;
+	
+    if (w.nw) {
+        f = w.nw.Window.get();
+        if (f) {
+            f.toggleFullscreen();
+            f.enterFullscreen();
+        }
+    }
+	
+    if (w.require) {
+        if (w.require("electron")) {
+            f = w.require("electron").getCurrentWindow();
+            f.setFullScreen(!0);
+            f.setMenuBarVisibility(!1);
+        }
+    }
+	
+    if (w.Windows) {
+        f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+        if (!f.isFullScreen || !f.isFullScreenMode) {
+            if (f.tryEnterFullScreenMode()) {
+                f.fullScreenSystemOverlayMode = w.Windows.UI.ViewManagement.ApplicationViewWindowingMode.fullScreen;
+            }
+        }
+    }
+	
     if (v.requestFullscreen) v.requestFullscreen();
     if (v.mozRequestFullScreen) v.mozRequestFullScreen();
     if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
@@ -62,6 +92,27 @@ p.g.toggleFullscreen = function() {
 
 p.g.exitFullscreen = function() {
     v = p.g.ca;
+	
+    if (w.nw) {
+        if (w.nw.Window.get()) w.nw.Window.get().leaveFullscreen();
+    }
+	
+    if (w.require) {
+        if (w.require("electron")) {
+            f = w.require("electron").getCurrentWindow();
+            f.setFullScreen(!1);
+            f.setMenuBarVisibility(!0);
+        }
+    }
+	
+    if (w.Windows) {
+        f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
+        if (f.isFullScreen || f.isFullScreenMode) {
+            f.exitFullScreenMode();
+            f.fullScreenSystemOverlayMode = w.Windows.UI.ViewManagement.ApplicationViewWindowingMode.preferredLaunchViewSize;
+        }
+    }
+	
     if (d.exitFullscreen) d.exitFullscreen();
     if (d.mozCancelFullScreen) d.mozCancelFullScreen();
     if (d.webkitExitFullscreen) d.webkitExitFullscreen();
@@ -141,9 +192,9 @@ p.g.clear = function() {
 };
 
 p.g.render = function(v, f) {
-    if (v == p.g.FILL) f.fill();
-    if (v == p.g.STROKE) f.stroke();
-    if (v == p.g.BOTH) {
+    if (v === p.g.FILL) f.fill();
+    if (v === p.g.STROKE) f.stroke();
+    if (v === p.g.BOTH) {
         f.fill();
         f.stroke();
     }
@@ -152,9 +203,9 @@ p.g.render = function(v, f) {
 p.g.text = function(t, x, y) {
     v = p.g.mode;
     f = p.g.c;
-    if (v == p.g.FILL) f.fillText(t, x, y);
-    if (v == p.g.STROKE) f.strokeText(t, x, y);
-    if (v == p.g.BOTH) {
+    if (v === p.g.FILL) f.fillText(t, x, y);
+    if (v === p.g.STROKE) f.strokeText(t, x, y);
+    if (v === p.g.BOTH) {
         f.fillText(t, x, y);
         f.strokeText(t, x, y);
     }
