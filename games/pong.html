@@ -10,11 +10,11 @@
             // Written by Rabia Alhaffar in July/1/2020
             // Variables
             // Paddles positions
-            var p1 = { x: pancake.canvas.compatible_width - 64, y: pancake.canvas.compatible_height / 2.5, up: false, down: false };
-            var p2 = { x: 32, y: pancake.canvas.compatible_height / 2.5, up: false, down: false };
+            var p1 = { x: pancake.canvas.compatible_width - 64, y: pancake.canvas.compatible_height / 2.5, w: 32, h: 168, up: false, down: false };
+            var p2 = { x: 32, y: pancake.canvas.compatible_height / 2.5, w: 32, h: 168, up: false, down: false };
             
             // Ball position,Ball speed,And ball radius
-            var ball = { x: pancake.canvas.compatible_width / 2, y: pancake.canvas.compatible_height / 2, vx: 0, vy: 0 };
+            var ball = { x: pancake.canvas.compatible_width / 2, y: pancake.canvas.compatible_height / 2, vx: 0, vy: 0, r: 16 };
             
             // Score for 2 players
             var score = { p1: 0, p2: 0 };
@@ -44,9 +44,9 @@
                 pancake.graphics.clear();
                 
                 // Draw paddles and ball
-                pancake.graphics.rect(p1.x, p1.y, 32, 128);
-                pancake.graphics.rect(p2.x, p2.y, 32, 128);
-                pancake.graphics.circle(ball.x, ball.y, 16);
+                pancake.graphics.rect(p1.x, p1.y, p1.w, p1.h);
+                pancake.graphics.rect(p2.x, p2.y, p2.w, p2.h);
+                pancake.graphics.circle(ball.x, ball.y, ball.r);
 
                 // Draw score
                 pancake.graphics.text(score.p2, 32, 64);
@@ -72,20 +72,20 @@
                 if (p2.y < 0) p2.y = 0;
 
                 // Collision with canvas borders
-                if (pancake.physics.checkCollisionCircleRect(ball.x, ball.y, 16, p1.x, p1.y, 32, 128)) {
+                if (pancake.physics.checkCollisionCircleRect(ball.x, ball.y, ball.r, p1.x, p1.y, p1.w, p1.h)) {
                     ball.vx = -ball.vx;
                     ball.vy = pancake.util.randomBetween(-10, 10);
                 }
-                if (pancake.physics.checkCollisionCircleRect(ball.x, ball.y, 16, p2.x, p2.y, 32, 128)) {
+                if (pancake.physics.checkCollisionCircleRect(ball.x, ball.y, ball.r, p2.x, p2.y, p2.w, p2.h)) {
                     ball.vx = -ball.vx;
                     ball.vy = pancake.util.randomBetween(-10, 10);
                 }
 
                 // Collision of ball with canvas borders
-                if (pancake.physics.checkCollisionTopCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ]) || pancake.physics.checkCollisionBottomCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ], 0)) ball.vy = -ball.vy;
+                if (pancake.physics.checkCollisionTopCanvas(ball) || pancake.physics.checkCollisionBottomCanvas(ball, 0)) ball.vy = -ball.vy;
 
                 // Collision with left/right side of canvas
-                if (pancake.physics.checkCollisionLeftCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ]) || pancake.physics.checkCollisionRightCanvas([ ball.x, ball.y, 16, ball.vx, ball.vy ], 0)) {
+                if (pancake.physics.checkCollisionLeftCanvas(ball) || pancake.physics.checkCollisionRightCanvas(ball, 0)) {
                     
                     // Check which side to increase score
                     if (pancake.physics.checkCollisionLeftCanvas(ball)) score.p1++;
