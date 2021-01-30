@@ -15,7 +15,7 @@ Pancake inspired by LOVE, Pygame, And even AppGameKit and it shares some of thei
 - Shares concepts of most lovable frameworks like LOVE, Pygame, And AppGameKit!
 - Easy and simple to setup!
 - Free, Moddable, Open-Source, Cross-Platform!
-- Fast, Lightweight, And thin in one pack! (All in over 40kb, Minimifed version over 30kb)
+- Fast, Very lightweight, And very thin in one file!
 - Every part needed is written without dependencies! From OS detection to gamepad support...
 - You can use `CanvasRenderingContext2D` or `WebGLRenderingContext` as graphics renderer!
 - Collision detection physics!
@@ -36,7 +36,7 @@ Want to know a lot? See the [documentation](https://github.com/Rabios/Pancake/tr
 - Creating a game canvas
 
 ```javascript
-// Create canvas with both width and height of 600,And set it's index to 0
+// Create canvas with both width and height of 600, And set it's index to 0
 pancake.canvas.create(600, 600, 0);
 
 // Create context with index 0 and set to use canvas that has index 0
@@ -48,7 +48,7 @@ pancake.graphics.useContext(0);
 - Drawing text
 
 ```javascript
-// Create canvas with both width and height of 600,And set it's index to 0
+// Create canvas with both width and height of 600, And set it's index to 0
 pancake.canvas.create(600, 600, 0);
 
 // Create context with index 0 and set to use canvas that has index 0
@@ -66,7 +66,7 @@ pancake.graphics.text("Hello Pancake", 10, 10);
 - Drawing shapes
 
 ```javascript
-// Create canvas with both width and height of 600,And set it's index to 0
+// Create canvas with both width and height of 600, And set it's index to 0
 pancake.canvas.create(800, 800, 0);
 
 // Create context with index 0 and set to use canvas that has index 0
