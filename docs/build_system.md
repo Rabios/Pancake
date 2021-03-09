@@ -12,8 +12,6 @@ You can also edit `build.py` to change build directory or build filename or even
 
 ### Haxe port
 
-Compilation flags provided to use in `build.hxml` so you can include modules you want and modules you don't want...
-
-ex: `--define PANCAKE_AUDIO` will include `pancake.audio` module when building Pancake!
+Haxe port is all in single file, You can comment class (module) you don't need with commenting it's loader in `Pancake` class.
 
 So Haxe won't include it!

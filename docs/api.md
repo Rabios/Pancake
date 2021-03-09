@@ -27,10 +27,10 @@ Pancake currently containts over 190 functions, Enjoy!
   - [`pancake.spritefont`](#pancakespritefont)
   - [`pancake.xhr`](#pancakexhr)
   - [Keyboard keys](#keyboard-keys)
-  - [TV Remote keys](#tv-remote-keys)
+    - [TV Remote keys](#tv-remote-keys)
   - [Gamepad and mouse buttons](#gamepad-and-mouse-buttons)
   - [Arrays](#arrays)
-    - [How to get content from index?](#how-to-get-content-from-index)
+      - [How to get content from index?](#how-to-get-content-from-index)
 
 ## `pancake.canvas`
 
@@ -504,7 +504,7 @@ pancake.input.key.ESCAPE
 pancake.input.key.INSERT
 ```
 
-## TV Remote keys
+### TV Remote keys
 
 ```js
 // Variables

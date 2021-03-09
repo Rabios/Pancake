@@ -283,7 +283,7 @@ if (p.b.s.GAMEPAD()) {
             if (w.Windows.Gaming.Input.Gamepad.gamepads[i]) {
                 v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
                 if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
-                else return (v.buttons === w.Windows.Gaming.Input.GamepadButtons[b]);
+                else return ((v.buttons & w.Windows.Gaming.Input.GamepadButtons[b]) != 0);
             }
         }
     };
@@ -296,7 +296,7 @@ if (p.b.s.GAMEPAD()) {
             if (w.Windows.Gaming.Input.Gamepad.gamepads[i]) {
                 v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
                 if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
-                else return (v.buttons === w.Windows.Gaming.Input.GamepadButtons[b]);
+                else return ((v.buttons & w.Windows.Gaming.Input.GamepadButtons[b]) != 0);
             }
         }
     };
@@ -350,11 +350,11 @@ if (p.b.s.GAMEPAD()) {
         if (a === p.i.GAMEPAD_CAMERA_ANALOG) return (p.i.gamepad_camera_horizontal_direction === d || p.i.gamepad_camera_vertical_direction === d);
     };
 } else {
-    p.i.gamepadConnected = function(i) { return !1 };
-    p.i.gamepadID = function(i) { return u };
+    p.i.gamepadConnected = function(i) { return !1; };
+    p.i.gamepadID = function(i) { return u; };
     p.i.gamepadButtonPressed = function(i, b) { return !1; };
     p.i.gamepadButtonTouched = function(i, b) { return !1; };
-    p.i.gamepadMovement = function(i, a, d) { return u };
+    p.i.gamepadMovement = function(i, a, d) { return u; };
     p.i.gamepadAnalogMoved = function(i, a, d) { return !1; };
 }
 

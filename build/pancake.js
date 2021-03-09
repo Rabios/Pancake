@@ -1,8 +1,8 @@
 // Pancake HTML5 game framework
 // https://github.com/Rabios/Pancake
-// Copyright (c) 2020 - 2021 [Rabia Alhaffar], Licensed under MIT License.
+// Copyright (c) 2020 - 2021 Rabia Alhaffar, Licensed under MIT License.
 var p = {};
-p.version = "v0.0.14";
+p.version = "v0.0.15";
 
 var w = window;
 var c = w.console;
@@ -327,7 +327,7 @@ w.onmousedown = w.onmspointerdown = w.onpointerdown = function(e) {
     p.i.click = !1;
 };
 
-w.onmouseup = w.onmspointerenter = w.onpointerenter = function(e) {
+w.onmouseup = w.onmspointerup = w.onpointerup = function(e) {
     p.i.mouse_x = ex(e);
     p.i.mouse_y = ey(e);
     p.i.swipe_finish_x = p.i.mouse_x - p.i.swipe_start_x;
@@ -554,9 +554,11 @@ if (p.b.s.GAMEPAD()) {
             v = n.getGamepads()[i];
             if (v) return v.buttons[b].pressed;
         } else {
-            v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
-            if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
-            else return (v.buttons === w.Windows.Gaming.Input.GamepadButtons[b]);
+            if (w.Windows.Gaming.Input.Gamepad.gamepads[i]) {
+                v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
+                if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
+                else return ((v.buttons & w.Windows.Gaming.Input.GamepadButtons[b]) != 0);
+            }
         }
     };
 
@@ -565,9 +567,11 @@ if (p.b.s.GAMEPAD()) {
             v = n.getGamepads()[i];
             if (v) return v.buttons[b].touched;
         } else {
-            v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
-            if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
-            else return (v.buttons === w.Windows.Gaming.Input.GamepadButtons[b]);
+            if (w.Windows.Gaming.Input.Gamepad.gamepads[i]) {
+                v = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
+                if (b === "leftTrigger" || b === "rightTrigger") return (v[b] >= p.i.gamepad_threshold);
+                else return ((v.buttons & w.Windows.Gaming.Input.GamepadButtons[b]) != 0);
+            }
         }
     };
 
@@ -620,11 +624,11 @@ if (p.b.s.GAMEPAD()) {
         if (a === p.i.GAMEPAD_CAMERA_ANALOG) return (p.i.gamepad_camera_horizontal_direction === d || p.i.gamepad_camera_vertical_direction === d);
     };
 } else {
-    p.i.gamepadConnected = function(i) { return !1 };
-    p.i.gamepadID = function(i) { return u };
+    p.i.gamepadConnected = function(i) { return !1; };
+    p.i.gamepadID = function(i) { return u; };
     p.i.gamepadButtonPressed = function(i, b) { return !1; };
     p.i.gamepadButtonTouched = function(i, b) { return !1; };
-    p.i.gamepadMovement = function(i, a, d) { return u };
+    p.i.gamepadMovement = function(i, a, d) { return u; };
     p.i.gamepadAnalogMoved = function(i, a, d) { return !1; };
 }
 
@@ -885,6 +889,7 @@ p.g.fullscreen = function() {
     
 p.g.toggleFullscreen = function() {
     v = p.g.ca;
+	
     if (w.nw) {
         f = w.nw.Window.get();
         if (f) {
@@ -892,6 +897,7 @@ p.g.toggleFullscreen = function() {
             f.enterFullscreen();
         }
     }
+	
     if (w.require) {
         if (w.require("electron")) {
             f = w.require("electron").getCurrentWindow();
@@ -899,6 +905,7 @@ p.g.toggleFullscreen = function() {
             f.setMenuBarVisibility(!1);
         }
     }
+	
     if (w.Windows) {
         f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
         if (!f.isFullScreen || !f.isFullScreenMode) {
@@ -907,6 +914,7 @@ p.g.toggleFullscreen = function() {
             }
         }
     }
+	
     if (v.requestFullscreen) v.requestFullscreen();
     if (v.mozRequestFullScreen) v.mozRequestFullScreen();
     if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
@@ -916,9 +924,11 @@ p.g.toggleFullscreen = function() {
 
 p.g.exitFullscreen = function() {
     v = p.g.ca;
+	
     if (w.nw) {
         if (w.nw.Window.get()) w.nw.Window.get().leaveFullscreen();
     }
+	
     if (w.require) {
         if (w.require("electron")) {
             f = w.require("electron").getCurrentWindow();
@@ -926,6 +936,7 @@ p.g.exitFullscreen = function() {
             f.setMenuBarVisibility(!0);
         }
     }
+	
     if (w.Windows) {
         f = w.Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
         if (f.isFullScreen || f.isFullScreenMode) {
@@ -933,6 +944,7 @@ p.g.exitFullscreen = function() {
             f.fullScreenSystemOverlayMode = w.Windows.UI.ViewManagement.ApplicationViewWindowingMode.preferredLaunchViewSize;
         }
     }
+	
     if (d.exitFullscreen) d.exitFullscreen();
     if (d.mozCancelFullScreen) d.mozCancelFullScreen();
     if (d.webkitExitFullscreen) d.webkitExitFullscreen();

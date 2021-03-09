@@ -1,8 +1,8 @@
 // Pancake HTML5 game framework
 // https://github.com/Rabios/Pancake
-// Copyright (c) 2020 - 2021 [Rabia Alhaffar], Licensed under MIT License.
+// Copyright (c) 2020 - 2021 Rabia Alhaffar, Licensed under MIT License.
 var p = {};
-p.version = "v0.0.14";
+p.version = "v0.0.15";
 
 var w = window;
 var c = w.console;

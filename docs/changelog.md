@@ -2,6 +2,10 @@
 
 > NOTE: For each update, I recommend you to always take look at [API](https://github.com/Rabios/Pancake/blob/master/docs/api.md) for changes occur.
 
+### v0.0.15 (Update 15)
+
+Fixed gamepad input limits on UWP platform, Now gamepad input works %100!
+
 ### v0.0.14 (Update 14)
 
 1. Added support and improvements for working with native stuff like NWJS, Electron, Phonegap, Cordova, WinJS, and UWP...

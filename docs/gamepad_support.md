@@ -51,4 +51,3 @@ Now gamepad input for UWP JavaScript supported by Pancake!
 3. Sometimes gamepad connected but browser gives error that is not connected or gamepad input doesn't works, In this case try to remove the controller and plug it again, Or...Keep pressing buttons until works.
 4. Gamepad Analogs also supported!
 5. Gamepad input might not work outside of game loop (Due to being how Gamepad API works).
-6. Due to how UWP JavaScript Gamepad API works, You cannot press multiple buttons (Except for LT, RT, Analogs buttons and their movement...)
