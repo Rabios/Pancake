@@ -33,7 +33,7 @@
 </html>
 ```
 
-> NOTES: You can even copy `pancake.js` or `pancake.min.js` to anywhere for using as Pancake is single file library
+> NOTE: You can even copy `pancake.js` or `pancake.min.js` to anywhere to use Pancake as it's just single file library!
 
 1. Run the HTML file in the browser
 2. Open "Developer Console"

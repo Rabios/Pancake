@@ -8,11 +8,11 @@ WebGL renderer is modified version of [`polygl.js`](https://github.com/Rabios/po
 
 ### NOTES
 
-1. Some functions still use `CanvasRenderingContext2D` backend, But before creating context you can disable them by using `pancake.graphics.ctx2d_enabled = false;`
+1. Some functions still use `CanvasRenderingContext2D` backend (Drawing texts), But before creating context you can disable them by using `pancake.graphics.ctx2d_enabled = false;`.
 2. Drawing video is experimental in WebGL (And might not work...)
 3. WebGL functions might not documented as they are intended to be used as internal functions in Pancake.
 4. HSL and HSLA colors are converted to RGB and RGBA for use in WebGL!
-5. colors as string won't work in WebGL
+5. colors as string won't work in WebGL!
 
 ### Backends Comparison
 

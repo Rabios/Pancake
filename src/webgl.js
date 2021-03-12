@@ -4,7 +4,6 @@ p.images = [];
 p.g.FILL = 1;
 p.g.STROKE = 2;
 p.g.BOTH = 3;
-var Mode = { FILL: 1, STROKE: 2, BOTH: 3 };
 p.g.texture = !1;
 p.g.animation = !1;
 p.g.p = u;

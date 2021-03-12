@@ -836,7 +836,6 @@ p.images = [];
 p.g.FILL = 1;
 p.g.STROKE = 2;
 p.g.BOTH = 3;
-var Mode = { FILL: 1, STROKE: 2, BOTH: 3 };
 p.g.tint = "";
 p.g.fits = !1;
 p.g.scissor = !0;
@@ -857,7 +856,7 @@ p.g.r.RGB = function() {
 
 p.g.r.RGBA = function() {
     f = p.u.random;
-    return ("rgba(" + f(255) + "," + f(255) + "," + f(255) + "," + f(255) + ")");
+    return ("rgba(" + f(255) + "," + f(255) + "," + f(255) + "," + m.random() + ")");
 };
 
 p.g.r.HSL = function() {
@@ -976,7 +975,7 @@ p.g.RGB = function(r, g, b) {
 };
 
 p.g.RGBA = function(r, g, b, a) {
-    return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+    return "rgba(" + r + "," + g + "," + b + "," + a / 255 + ")";
 };
 
 p.g.HSL = function(h, s, l) {

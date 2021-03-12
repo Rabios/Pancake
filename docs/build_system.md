@@ -2,7 +2,7 @@
 
 The way of building Pancake has changed over a lot of versions, But improved to be better...
 
-To build Pancake you require Python (Although you can use Pancake by linking to source files part-by-part)
+To build Pancake you need Python (Although you can use Pancake by linking to source files part-by-part)
 
 ### Customizing Build
 
@@ -12,6 +12,19 @@ You can also edit `build.py` to change build directory or build filename or even
 
 ### Haxe port
 
-Haxe port is all in single file, You can comment class (module) you don't need with commenting it's loader in `Pancake` class.
+Haxe port is available on haxelib and GitHub, Use `haxelib install Pancake` to get it!
 
-So Haxe won't include it!
+After that, in `build.hxml` of your project, Include modules by definitions, Like this:
+
+```hx
+--define PANCAKE_CANVAS2D
+--define PANCAKE_GRAPHICS
+--define PANCAKE_GAME
+--define PANCAKE_TIMERS
+
+-L Pancake
+--class-path src
+--dce full
+--js bin/game.js
+--main Main
+```

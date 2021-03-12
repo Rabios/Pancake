@@ -1,6 +1,6 @@
 # Mobile Support
 
-At the meantime, Tapping and Accelerometer motion and Swiping is supported by pancake so you can develop games for mobile with ease...
+At the meantime, Tapping and Accelerometer motion and Swiping is supported by pancake so you can develop games for mobile with ease!
 
 ## How to use?
 
@@ -40,12 +40,13 @@ At the meantime, Tapping and Accelerometer motion and Swiping is supported by pa
     </body>
 </html>
 ```
-## NOTES
+## IMPLEMENTATION NOTES
 
-1. If you're developing from mobile, Use Mozilla Firefox or Spck editor instead of Google Chrome cause Mozilla Firefox can allow file system, Plus i developed Pancake on Mozilla Firefox,NOT Google Chrome
-2. Touch and Swipe emulated on PC with Mouse, But Accelerometer can't work on PC but it won't throw errors... 
-3. If your game using swipe and you are running it via Google Chrome on mobile,See below to know before using swiping on Chrome
-4. If you holded with your finger(s) for long time on screen/canvas, Game might not respond to touch input so you need to restart the entire game (Problem happens in most browsers on Android and iOS)
+1. Touch and Swipe emulated on PC with Mouse, But Accelerometer can't work on PC but it won't throw errors.
+
+2. If your game using swipe and you are running it via Google Chrome on mobile, See below to know before using swiping on Chrome.
+
+3. If you holded with your finger(s) for long time on screen/canvas, Game might not respond to touch input so you need to restart the entire game (Problem happens in most browsers on Android and iOS).
 
 ## Solve problem: Swiping down in Google Chrome for Android/iOS reloads page
 

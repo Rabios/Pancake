@@ -4,14 +4,15 @@
 
 ### v0.0.15 (Update 15)
 
-Fixed gamepad input limits on UWP platform, Now gamepad input works %100!
+1. Fixed gamepad input limits on UWP platform, Now gamepad input works %100!
+2. Fixed alpha setting for `pancake.graphics.random.RGBA` and `pancake.graphics.RGBA` for `CanvasRenderingContext2D` backend!
 
 ### v0.0.14 (Update 14)
 
 1. Added support and improvements for working with native stuff like NWJS, Electron, Phonegap, Cordova, WinJS, and UWP...
 2. As gamepad functions not supported by Internet Explorer, You'll get null/false instead of being not exist in Pancake (That's to prove error-safe lib)
 3. Done some improvements...
-4. Added input-customizing variables like `pancake.input.gamepad_threshold`, `pancake.input.swipe_finish_x_limit`, `pancake.input.swipe_finish_y_limit`, `pancake.input.swipe_finish_time_limit`, `pancake.input.accelerometer_frequency`, Enjoy modding some input sensitivity!
+4. Added input-customizing variables like `pancake.input.gamepad_threshold`, `pancake.input.swipe_finish_x_limit`, `pancake.input.swipe_finish_y_limit`, `pancake.input.swipe_finish_time_limit`, `pancake.input.accelerometer_frequency`, Enjoy modding input sensitivity!
 
 ### v0.0.13 (Update 13)
 
@@ -114,26 +115,18 @@ pancake.physics.checkCollisionPolygonTriangle
 3. Updated video and audio examples to check if video and audio playing supported
 4. Improved browser and OS examples
 
-> CAUTION: If you are developing a game that focuses on frame rates,Do not use `pancake.timers.second` as it's not accurate in counting a second
-
 ### v0.0.10 (Update 10)
 
-1. Optimized the framework for the second time
-2. Fixed example `graphics_04.html` (Changing color mode example),Where color mode doesn't change
-
-> That's all, Thanks for support!
+1. Optimizations!
+2. Fixed example `graphics_04.html` (Changing color mode example), Where color mode doesn't change!
 
 ### v0.0.9 (Update 9)
 
-Optimized the framework for the first time
-
-> TODO: Optimize Pancake for the second time
+Optimizations!
 
 ### v0.0.8 (Update 8)
 
 Added `pancake.graphics.shadow(color, blur)` to apply shadows in-game when drawing shapes
-
-> TODO: Optimizing
 
 ### v0.0.7 (Update 7)
 
@@ -141,8 +134,6 @@ Added `pancake.graphics.shadow(color, blur)` to apply shadows in-game when drawi
 2. Better fullscreen check and better fullscreen functionality
 3. Added ability to detect SeaMonkey browser, And Maxthon browser (In case developer didn't changed `navigator.userAgent` from Maxthon browser settings)
 4. Improved games,And also improved some examples
-
-> TODO: Optimize Pancake to become smaller, That doesn't means i will remove content
 
 ### v0.0.6 (Update 6)
 
