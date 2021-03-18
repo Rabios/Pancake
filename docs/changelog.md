@@ -6,6 +6,7 @@
 
 1. Fixed gamepad input limits on UWP platform, Now gamepad input works %100!
 2. Fixed alpha setting for `pancake.graphics.random.RGBA` and `pancake.graphics.RGBA` for `CanvasRenderingContext2D` backend!
+3. Fixed analog naming (Too old naming mistake...)
 
 ### v0.0.14 (Update 14)
 

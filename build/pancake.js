@@ -580,17 +580,17 @@ if (p.b.s.GAMEPAD()) {
             v = n.getGamepads()[i];
             if (v) {
                 if (a === p.i.GAMEPAD_MOVE_ANALOG) {
-                    if (v.axes[1] <= d) p.i.gamepad_move_vertical_direction = "UP";
-                    if (v.axes[1] >= d) p.i.gamepad_move_vertical_direction = "DOWN";
-                    if (v.axes[0] <= d) p.i.gamepad_move_horizontal_direction = "LEFT";
-                    if (v.axes[0] >= d) p.i.gamepad_move_horizontal_direction = "RIGHT";
+                    if (v.axes[3] <= d) p.i.gamepad_move_vertical_direction = "UP";
+                    if (v.axes[3] >= d) p.i.gamepad_move_vertical_direction = "DOWN";
+                    if (v.axes[2] <= d) p.i.gamepad_move_horizontal_direction = "LEFT";
+                    if (v.axes[2] >= d) p.i.gamepad_move_horizontal_direction = "RIGHT";
                 }
-
+                
                 if (a === p.i.GAMEPAD_CAMERA_ANALOG) {
-                    if (v.axes[3] <= d) p.i.gamepad_camera_vertical_direction = "UP";
-                    if (v.axes[3] >= d) p.i.gamepad_camera_vertical_direction = "DOWN";
-                    if (v.axes[2] <= d) p.i.gamepad_camera_horizontal_direction = "LEFT";
-                    if (v.axes[2] >= d) p.i.gamepad_camera_horizontal_direction = "RIGHT";
+                    if (v.axes[1] <= d) p.i.gamepad_camera_vertical_direction = "UP";
+                    if (v.axes[1] >= d) p.i.gamepad_camera_vertical_direction = "DOWN";
+                    if (v.axes[0] <= d) p.i.gamepad_camera_horizontal_direction = "LEFT";
+                    if (v.axes[0] >= d) p.i.gamepad_camera_horizontal_direction = "RIGHT";
                 }
             }
         } else {
@@ -598,17 +598,17 @@ if (p.b.s.GAMEPAD()) {
             if (v) {
                 f = w.Windows.Gaming.Input.Gamepad.gamepads[i].getCurrentReading();
                 if (a === p.i.GAMEPAD_MOVE_ANALOG) {
-                    if (f.leftThumbstickY >= d) p.i.gamepad_move_vertical_direction = "UP";
-                    if (f.leftThumbstickY <= d) p.i.gamepad_move_vertical_direction = "DOWN";
-                    if (f.leftThumbstickX <= d) p.i.gamepad_move_horizontal_direction = "LEFT";
-                    if (f.leftThumbstickX >= d) p.i.gamepad_move_horizontal_direction = "RIGHT";
+                    if (f.rightThumbstickY >= d) p.i.gamepad_move_vertical_direction = "UP";
+                    if (f.rightThumbstickY <= d) p.i.gamepad_move_vertical_direction = "DOWN";
+                    if (f.rightThumbstickX <= d) p.i.gamepad_move_horizontal_direction = "LEFT";
+                    if (f.rightThumbstickX >= d) p.i.gamepad_move_horizontal_direction = "RIGHT";
                 }
-
+                
                 if (a === p.i.GAMEPAD_CAMERA_ANALOG) {
-                    if (f.rightThumbstickY >= d) p.i.gamepad_camera_vertical_direction = "UP";
-                    if (f.rightThumbstickY <= d) p.i.gamepad_camera_vertical_direction = "DOWN";
-                    if (f.rightThumbstickX <= d) p.i.gamepad_camera_horizontal_direction = "LEFT";
-                    if (f.rightThumbstickX >= d) p.i.gamepad_camera_horizontal_direction = "RIGHT";
+                    if (f.leftThumbstickY >= d) p.i.gamepad_camera_vertical_direction = "UP";
+                    if (f.leftThumbstickY <= d) p.i.gamepad_camera_vertical_direction = "DOWN";
+                    if (f.leftThumbstickX <= d) p.i.gamepad_camera_horizontal_direction = "LEFT";
+                    if (f.leftThumbstickX >= d) p.i.gamepad_camera_horizontal_direction = "RIGHT";
                 }
             }
         }
