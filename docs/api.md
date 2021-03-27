@@ -4,6 +4,8 @@ This is the official API page of Pancake, I know it's weird to believe how i fit
 
 Pancake currently containts over 190 functions, Enjoy!
 
+> NOTE: For Haxe version, Pancake API starts with `Pancake` instead of `pancake` which used in JavaScript!
+
 - [Pancake API](#pancake-api)
   - [`pancake.canvas`](#pancakecanvas)
   - [`pancake.context`](#pancakecontext)
