@@ -2,7 +2,7 @@
 
 <div align="center">
 	<img src="https://github.com/Rabios/Pancake/blob/master/pancake.png" width="256", height="256"><br>
-	<p><q>Lightweight, Fast, Easy-to-use HTML5 game programming library/Game framework for all purposes!</q></p>
+	<p><q>Lightweight, Fast, Easy-to-use HTML5 2D game framework!</q></p>
 </div><br>
 <br>
 
