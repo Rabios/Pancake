@@ -170,8 +170,6 @@ var gameloop = pancake.timers.timer(game, 60); // Set frames per second to 60
 
 ```javascript
 function game() {
-    // If key pressed
-
     // If key down
     if (pancake.input.keydown(pancake.input.key.X)) alert("Key down/press");
 
