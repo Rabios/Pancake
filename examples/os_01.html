@@ -15,6 +15,7 @@
         <p>PlayStation: <b id="ps"></b></p>
         <p>XBOX: <b id="xbox"></b></p>
         <p>Nintendo: <b id="nintendo"></b></p>
+        <p>Tizen: <b id="tzn"></b></p>
         <script src="../build/pancake.js"></script>
         <script>
             document.getElementById("android").innerHTML = pancake.os.ANDROID ? "YES" : "NO";
@@ -46,6 +47,9 @@
             
             document.getElementById("nintendo").innerHTML = pancake.os.NINTENDO ? "YES" : "NO";
             document.getElementById("nintendo").style.color = pancake.os.NINTENDO ? "green" : "red";
+            
+            document.getElementById("tzn").innerHTML = pancake.os.TIZEN ? "YES" : "NO";
+            document.getElementById("tzn").style.color = pancake.os.TIZEN ? "green" : "red";
         </script>
         <style>
             b { color: red; }

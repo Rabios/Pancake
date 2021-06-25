@@ -12,5 +12,12 @@ p.ga.restart = function() {
 p.ga.close = function() {
     if (n.app) n.app.exitApp();
     else if (n.device) n.device.exitApp();
+    else if (w.tizen) {
+        var tza = w.tizen.application;
+        if (tza) {
+            var tzp = tza.getCurrentApplication();
+            try { tzp.exit(); } catch (e) {}
+        }
+    }
     else w.close();
 };

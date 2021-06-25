@@ -25,4 +25,5 @@ p.o.NEXUS_PLAYER = f(/Nexus Player/i);
 p.o.MINIX_NEO_X5 = f(/NEO-X5/i);
 p.o.APPLE_TV = f(/AppleTV/i);
 p.o.KINDLE = f(/Kindle/i);
+p.o.TIZEN = f(/Tizen/i);
 p.o.is = p.b.is;

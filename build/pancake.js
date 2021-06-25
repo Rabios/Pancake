@@ -1,8 +1,8 @@
 // Pancake HTML5 game framework
 // https://github.com/Rabios/Pancake
-// Copyright (c) 2020 - 2021 Rabia Alhaffar, Licensed under MIT License.
+// Copyright (c) 2020 - 2022 Rabia Alhaffar, Licensed under MIT License.
 var p = {};
-p.version = "v0.0.15";
+p.version = "v0.0.16";
 
 var w = window;
 var c = w.console;
@@ -22,6 +22,7 @@ var v = u;
 var q = u;
 var f = u;
 var k = u;
+var tz = w.tizen;
 function ex(o) { return o.clientX || o.pageX; };
 function ey(o) { return o.clientY || o.pageY; };
 function x() { return new (w.ActiveXObject || w.XMLHttpRequest)("Microsoft.XMLHTTP"); }
@@ -269,6 +270,13 @@ p.ga.restart = function() {
 p.ga.close = function() {
     if (n.app) n.app.exitApp();
     else if (n.device) n.device.exitApp();
+    else if (w.tizen) {
+        var tza = w.tizen.application;
+        if (tza) {
+            var tzp = tza.getCurrentApplication();
+            try { tzp.exit(); } catch (e) {}
+        }
+    }
     else w.close();
 };
 
@@ -722,6 +730,7 @@ p.o.NEXUS_PLAYER = f(/Nexus Player/i);
 p.o.MINIX_NEO_X5 = f(/NEO-X5/i);
 p.o.APPLE_TV = f(/AppleTV/i);
 p.o.KINDLE = f(/Kindle/i);
+p.o.TIZEN = f(/Tizen/i);
 p.o.is = p.b.is;
 
 p.re = {};

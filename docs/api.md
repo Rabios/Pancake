@@ -378,6 +378,7 @@ pancake.os.NEXUS_PLAYER                                      // Returns if OS is
 pancake.os.MINIX_NEO_X5                                      // Returns if OS is Minix Neo-X5 TV OS
 pancake.os.APPLE_TV                                          // Returns if OS is Apple TV OS
 pancake.os.KINDLE                                            // Returns if OS is Amazon Kindle OS
+pancake.os.TIZEN                                             // Returns if OS is Tizen 
 pancake.os.is(str)                                           // Same as pancake.browser.is(str)
 ```
 

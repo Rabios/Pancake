@@ -2,6 +2,10 @@
 
 > NOTE: For each update, I recommend you to always take look at [API](https://github.com/Rabios/Pancake/blob/master/docs/api.md) for changes occur.
 
+### v0.0.16 (Update 16)
+
+Added `pancake.os.TIZEN` and Tizen interface for `pancake.game.close()` to support Tizen!
+
 ### v0.0.15 (Update 15)
 
 1. Fixed gamepad input limits on UWP platform, Now gamepad input works %100!
