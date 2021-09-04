@@ -31,6 +31,8 @@ Pancake inspired by LOVE, Pygame, And even AppGameKit and it shares some of thei
 
 Want to know a lot? See the [documentation](https://github.com/Rabios/Pancake/tree/master/docs/README.md)
 
+> Also check out our Discord server [here](https://discord.gg/ANTU4SHQ3W)
+
 ## Examples
 
 - Creating a game canvas
